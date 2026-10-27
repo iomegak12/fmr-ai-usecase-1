@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${GOAL_DB_HOST:goal-db}:${GOAL_DB_PORT:5432}/${GOAL_DB_NAME:goal_db}
+  main:
+    banner-mode: off
+  output:
+    ansi:
+      enabled: never
+app:
+  database-host: ${GOAL_DB_HOST:goal-db}
+logging:
+  structured:
+    format:
+      console: ecs

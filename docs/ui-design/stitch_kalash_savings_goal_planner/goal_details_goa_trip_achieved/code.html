@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-container": "#fffbff", "inverse-primary": "#ffb786", "surface-dim": "#dfd9d1", "on-secondary-fixed-variant": "#444173", "surface-container-lowest": "#ffffff", "secondary-fixed": "#e3dfff", "on-secondary-container": "#514f81", "outline-variant": "#dac2b3", "inverse-surface": "#33302b", "secondary": "#5b598c", "secondary-fixed-dim": "#c4c1fb", "on-secondary": "#ffffff", "surface": "#fff8f1", "tertiary": "#186a22", "tertiary-fixed": "#a3f69c", "secondary-container": "#c7c3fe", "on-surface": "#1e1b17", "surface-container-highest": "#e8e1da", "on-primary": "#ffffff", "surface-container-high": "#eee7df", "surface-tint": "#954a00", "outline": "#877367", "on-primary-fixed": "#311400", "surface-container": "#f4ede5", "surface-container-low": "#f9f3eb", "on-surface-variant": "#544338", "on-secondary-fixed": "#181445", "surface-bright": "#fff8f1", "on-primary-fixed-variant": "#723600", "surface-variant": "#e8e1da", "error": "#ba1a1a", "on-error-container": "#93000a", "primary": "#924800", "on-tertiary-fixed": "#002204", "error-container": "#ffdad6", "on-tertiary-container": "#f7fff1", "primary-fixed-dim": "#ffb786", "on-background": "#1e1b17", "tertiary-fixed-dim": "#88d982", "tertiary-container": "#358438", "background": "#fff8f1", "on-error": "#ffffff", "primary-fixed": "#ffdcc6", "inverse-on-surface": "#f7f0e8", "primary-container": "#b25f18", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#005312" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }, spacing: { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-tablet": "1.5rem", "margin-desktop": "4rem", "space-lg": "1.5rem", "margin": "1rem", "margin-tablet": "2rem", "gutter": "1rem", "space-sm": "0.5rem", "gutter-desktop": "2rem" }, fontFamily: { "label-lg": ["Inter"], "currency-md": ["Inter"], "body-md": ["Inter"], "headline-md": ["Epilogue"], "display": ["Epilogue"], "headline-sm": ["Epilogue"], "body-lg": ["Inter"], "body-sm": ["Inter"], "currency-display": ["Inter"], "display-mobile": ["Epilogue"], "label-sm": ["Inter"], "headline-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "label-md": ["Inter"] }, fontSize: { "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "currency-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "currency-display": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;background-color:#fff8f1;color:#1e1b17;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-full text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Kalash Pot Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UjBVCdD5JsGJZFA5FX5cKrQ2nGP7F66_8p0XwzkAOZ2_2e-C3KKXR_b4JsUe8pbEYF980n9moC6DPh8tcqYc-fknhGMm9MrgJkZesWsaFsz0Njd9Wvi7sSZ_t6a2osRKhYUNpP2Q7ESR78lg8fJYHzOpMRRVZOh8Gl1C9nhS81wnzLMuXCUmvoW9moVXviVyvUG7uIrAzKeT7-arhpmX0Up5jXYV0W56wtjaSV348G2fFJmqL6qu4PQg"/><div class="flex flex-col"><h1 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Goal Details</h1><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Kalash</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Log out" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">logout</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface px-margin"><div class="flex flex-col w-full pb-8">
+<!-- Celebration Banner (Joyful Festive Banner) -->
+<div class="relative overflow-hidden rounded-xl bg-tertiary/10 p-space-md mb-space-md shadow-sm">
+<div class="absolute -right-4 -top-4 w-20 h-20 rounded-full bg-primary-fixed/30 blur-xl pointer-events-none"></div>
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary/15 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">celebration</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-tertiary">Goal Achieved!</span>
+<span class="text-body-sm">✨</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5 leading-snug">
+          Your sacred vessel is full and overflowing with abundance.
+        </p>
+</div>
+</div>
+</div>
+<!-- Goal Title & Status Header -->
+<div class="flex items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">beach_access</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface truncate">Goa Trip</h2>
+<span class="text-[16px]">🌴</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Summer Getaway 2025</p>
+</div>
+</div>
+<!-- Achieved Chip Token -->
+<div class="inline-flex items-center gap-1 h-6 px-2.5 rounded-full bg-[#E8F5E9] text-[#2E7D32] shrink-0 font-label-sm text-label-sm font-semibold tracking-wide">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>ACHIEVED</span>
+</div>
+</div>
+<!-- Hero Kalash Card (Vessel Overflowing Variant) -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container-lowest p-space-md mb-space-md shadow-md">
+<div class="flex flex-col sm:flex-row items-center gap-space-md">
+<!-- Custom Kalash Pot Graphic (Overflowing 120.0%) -->
+<div class="relative w-36 h-36 shrink-0 flex items-center justify-center">
+<!-- Ambient festive glow ring -->
+<div class="absolute inset-0 rounded-full bg-primary/10 animate-pulse blur-md"></div>
+<svg class="w-full h-full relative z-10" fill="none" viewbox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+<!-- Pot Silhouette Outline & Fill -->
+<defs>
+<lineargradient id="kalashFill" x1="0%" x2="0%" y1="100%" y2="0%">
+<stop offset="0%" stop-color="#924800"></stop>
+<stop offset="65%" stop-color="#b25f18"></stop>
+<stop offset="100%" stop-color="#ffb786"></stop>
+</lineargradient>
+<lineargradient id="nectarOverflow" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#ffb786"></stop>
+<stop offset="100%" stop-color="#ffdcc6"></stop>
+</lineargradient>
+</defs>
+<!-- Back Garland / Aura -->
+<circle cx="70" cy="74" opacity="0.6" r="54" stroke="#dac2b3" stroke-dasharray="4 4" stroke-width="2"></circle>
+<!-- Pot Base Body (Vessel fully packed & glowing) -->
+<!-- Neck & Rim -->
+<ellipse cx="70" cy="46" fill="#b25f18" rx="28" ry="7"></ellipse>
+<ellipse cx="70" cy="44" fill="#ffdcc6" rx="25" ry="5"></ellipse>
+<!-- Main Belly of Vessel -->
+<path d="M44 49 C30 65 30 100 48 112 C54 116 86 116 92 112 C110 100 110 65 96 49 Z" fill="url(#kalashFill)"></path>
+<!-- Overfill Liquid Crest Wave (Golden abundance level reaching top rim) -->
+<path d="M42 60 C52 56 62 64 74 60 C84 56 94 62 98 60 C102 76 100 100 88 110 C80 114 60 114 52 110 C40 100 38 78 42 60 Z" fill="#ffdcc6" opacity="0.35"></path>
+<!-- Overflow Spilling Drops on Sides -->
+<circle cx="38" cy="62" fill="#ffb786" r="3"></circle>
+<circle cx="34" cy="74" fill="#ffb786" r="2.5"></circle>
+<circle cx="102" cy="64" fill="#ffb786" r="3"></circle>
+<circle cx="106" cy="77" fill="#ffb786" r="2.5"></circle>
+<!-- Golden Garland (Mala) Swag -->
+<path d="M44 68 C58 84 82 84 96 68" fill="none" stroke="#186a22" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="48" cy="72" fill="#ffdcc6" r="2"></circle>
+<circle cx="58" cy="78" fill="#ffdcc6" r="2.5"></circle>
+<circle cx="70" cy="80" fill="#ffdcc6" r="3"></circle>
+<circle cx="82" cy="78" fill="#ffdcc6" r="2.5"></circle>
+<circle cx="92" cy="72" fill="#ffdcc6" r="2"></circle>
+<!-- Coconut & Mango Leaves on top (Traditional Kalash peak) -->
+<path d="M60 44 C66 32 70 24 70 20 C70 24 74 32 80 44 Z" fill="#186a22"></path>
+<path d="M52 45 C56 37 64 30 70 30" fill="none" stroke="#358438" stroke-linecap="round" stroke-width="2"></path>
+<path d="M88 45 C84 37 76 30 70 30" fill="none" stroke="#358438" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="70" cy="30" fill="#924800" r="8"></circle>
+<path d="M68 24 L72 36" stroke="#dac2b3" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+<!-- Dynamic Floating Badge 120% -->
+<div class="absolute bottom-1 right-2 bg-tertiary text-on-tertiary px-2 py-0.5 rounded-full font-label-sm text-label-sm font-bold shadow-md flex items-center gap-0.5">
+<span>120.0%</span>
+</div>
+</div>
+<!-- Stats Metric Group -->
+<div class="flex-1 w-full flex flex-col justify-center text-center sm:text-left">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium uppercase tracking-wider">Total Accumulation</span>
+<div class="flex items-baseline justify-center sm:justify-start gap-space-xs my-0.5">
+<span class="font-currency-display text-currency-display text-primary leading-none">₹60,000</span>
+<span class="font-body-md text-body-md text-on-surface-variant font-medium">of ₹50,000</span>
+</div>
+<!-- Surplus Tag -->
+<div class="inline-flex items-center justify-center sm:justify-start gap-1 text-tertiary my-1">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-md text-label-md font-semibold">+₹10,000 surplus abundance!</span>
+</div>
+<!-- Completion Date Stamp -->
+<div class="flex items-center justify-center sm:justify-start gap-space-xs mt-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">event_available</span>
+<span class="font-body-sm text-body-sm">Achieved on 30 Jun 2025</span>
+</div>
+</div>
+</div>
+<!-- Progress Track Bar (Full + Overflow Bar) -->
+<div class="mt-space-md pt-space-sm">
+<div class="flex justify-between items-center mb-1.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Vessel Capacity</span>
+<span class="font-label-sm text-label-sm font-semibold text-tertiary">120.0% Filled</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-primary rounded-l-full" style="width: 83.33%;"></div>
+<div class="h-full bg-tertiary rounded-r-full" style="width: 16.67%;"></div>
+</div>
+<div class="flex justify-between items-center mt-1 text-on-surface-variant">
+<span class="font-body-sm text-body-sm">Target: ₹50,000</span>
+<span class="font-body-sm text-body-sm font-medium text-tertiary">Surplus: +₹10,000</span>
+</div>
+</div>
+</div>
+<!-- Destination Teaser & Visual Context Placeholders -->
+<div class="grid grid-cols-2 gap-space-sm mb-space-md">
+<div class="relative h-24 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A serene sunlit tropical beach in South Goa with calm turquoise waves meeting golden sandy shores, framed by lush leaning coconut palms and a tranquil warm morning haze echoing the Kalash copper palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNZuVCA2rEgWklQd5CFD3Fm0F9Bng17egwX9SGrqbQbKUdgESNCN-2EmBVsbTQy5oKofIS1zLLqsUTcPuN6S53aJz4jsa3gkVj-nowgA_xG2hMkav8f38MP3Md2x8VS6tOvoEwCWC4iACe1w1gRGNUCXUqXzYRFWfgFAV2ajwC10IC_6WNaLtX4GT47EnJMgJ0FmqldrnyUb6Ojss9ncRJxvMQTxzeZD-mNkbSXBi6BF7tc88CarW4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-transparent to-transparent flex items-end p-2">
+<span class="font-label-sm text-label-sm text-on-primary-container font-medium">Palolem Beach</span>
+</div>
+</div>
+<div class="relative h-24 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="An artisanal coastal resort wooden veranda at sunset with woven wicker chairs, warm brass lanterns casting amber light, and an inviting glass of chilled kokum refresher." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYbeis_vtRLDSpwgSEzf6AELPD2D6ICfXUvA-TLS7i_WjftJBfzmXqINfE5I8JmklEsKhNOr-y7o-ajZxZtS7LXWHTuWYjXBzaNNr6Pg5tFwEd66F-dD7yv0DWmqmVkH2bIffqrSMgm7Cc7xQHgfNrCg4zmWtYA-nqEnpk2rzPZGDjVZfzQ8FFf_sxZCMkGzS0eS9OEsXtyS9NYRsH2EKaqaoZ1AgbaWQ2YRmbHNY9pm-oO1ipKCrF"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/70 via-transparent to-transparent flex items-end p-2">
+<span class="font-label-sm text-label-sm text-on-primary-container font-medium">Ocean Villa Stay</span>
+</div>
+</div>
+</div>
+<!-- Insights Metrics Row (3-Panel Grid) -->
+<div class="grid grid-cols-3 gap-space-xs mb-space-md">
+<!-- Metric 1: Suggested Monthly -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[16px]">savings</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Suggested</p>
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate mt-0.5">₹0 / mo</p>
+<span class="font-body-sm text-body-sm text-tertiary block leading-tight">Target Reached</span>
+</div>
+</div>
+<!-- Metric 2: Health Pace -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="w-7 h-7 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary mb-2">
+<span class="material-symbols-outlined text-[16px]">speed</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Health Pace</p>
+<p class="font-label-md text-label-md text-tertiary font-semibold truncate mt-0.5">Achieved</p>
+<span class="font-body-sm text-body-sm text-on-surface-variant block leading-tight">120.0% Speed</span>
+</div>
+</div>
+<!-- Metric 3: Vessel Status -->
+<div class="bg-surface-container-lowest p-space-sm rounded-xl shadow-sm flex flex-col justify-between">
+<div class="w-7 h-7 rounded-lg bg-primary-fixed flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined text-[16px]">water_full</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pot Status</p>
+<p class="font-label-md text-label-md text-on-surface font-semibold truncate mt-0.5">Full Vessel</p>
+<span class="font-body-sm text-body-sm text-primary block leading-tight">Brimming ✨</span>
+</div>
+</div>
+</div>
+<!-- Strict Action Buttons Section -->
+<!-- Note: "Deposit" button is purposefully hidden as goal is completed -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Withdraw Action (Prominent) -->
+<button class="h-12 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-space-xs shadow-md active:scale-[0.99] transition-transform">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+<span>Withdraw</span>
+</button>
+<!-- Raise Target Action -->
+<button class="h-12 rounded-xl bg-surface-container-highest text-on-surface font-label-lg text-label-lg flex items-center justify-center gap-space-xs hover:bg-surface-container-high active:scale-[0.99] transition-transform">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span>Raise Target</span>
+</button>
+</div>
+<!-- Secondary Celebrate & Share Button -->
+<button class="h-11 rounded-xl bg-surface-container-lowest text-primary font-label-md text-label-md flex items-center justify-center gap-space-xs shadow-sm hover:bg-surface-container active:scale-[0.99] transition-colors" id="confettiTrigger">
+<span class="material-symbols-outlined text-[18px]">share</span>
+<span>Celebrate &amp; Share Achievement</span>
+</button>
+</div>
+<!-- Recent Transactions Section -->
+<div class="flex flex-col bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">history</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Deposits</h3>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold uppercase tracking-wider">Goal Fulfilled</span>
+</div>
+<!-- Transaction List -->
+<div class="flex flex-col gap-space-sm">
+<!-- Item 1: Final Overflow Deposit -->
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Bonus Abundance Top-up</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">30 Jun 2025 • UPI Deposit</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-md text-currency-md text-tertiary">+₹10,000</span>
+<span class="font-label-sm text-label-sm text-tertiary block">Milestone 120%</span>
+</div>
+</div>
+<div class="h-px bg-surface-container w-full"></div>
+<!-- Item 2: Target Completing Deposit -->
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-primary-fixed text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Target Reached Deposit</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">15 Jun 2025 • Auto-Save Rule</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-md text-currency-md text-primary">+₹15,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">100% Mark</span>
+</div>
+</div>
+<div class="h-px bg-surface-container w-full"></div>
+<!-- Item 3: Steady Ritual Deposit -->
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Monthly Vessel Contribution</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">01 May 2025 • Net Banking</span>
+</div>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-md text-currency-md text-on-surface">+₹15,000</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">70% Mark</span>
+</div>
+</div>
+</div>
+<!-- View All Link -->
+<a class="mt-space-sm pt-space-xs flex items-center justify-center gap-1 font-label-md text-label-md text-primary hover:text-primary-container font-semibold transition-colors" href="#">
+<span>View all transactions</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<script>
+  (function() {
+    const trigger = document.getElementById('confettiTrigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      // Gentle native vibration feedback if supported
+      if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
+
+      // Temporary button state to delight user
+      const originalText = trigger.innerHTML;
+      trigger.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span><span>Blessings Shared! 🎉</span>';
+      trigger.classList.add('bg-tertiary/10', 'text-tertiary');
+
+      setTimeout(() => {
+        trigger.innerHTML = originalText;
+        trigger.classList.remove('bg-tertiary/10', 'text-tertiary');
+      }, 2500);
+    });
+  })();
+</script></main></body></html>

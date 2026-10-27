@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: goal-service
+  profiles:
+    default: local
+  datasource:
+    url: jdbc:postgresql://${GOAL_DB_HOST:localhost}:${GOAL_DB_PORT:5432}/${GOAL_DB_NAME:goal_db}
+    username: ${GOAL_DB_USER:goal_user}
+    password: ${GOAL_DB_PASSWORD:}
+    hikari:
+      connection-timeout: 2000
+      validation-timeout: 1000
+      initialization-fail-timeout: -1
+      maximum-pool-size: 10
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        boot.allow_jdbc_metadata_access: false
+        jdbc.time_zone: UTC
+  jackson:
+    deserialization:
+      accept-float-as-int: false
+server:
+  port: ${GOAL_SERVICE_PORT:8080}
+  shutdown: immediate
+  forward-headers-strategy: framework
+app:
+  timezone: ${APP_TIMEZONE:Asia/Kolkata}
+  database-host: ${GOAL_DB_HOST:localhost}
+  database-port: ${GOAL_DB_PORT:5432}
+  database-name: ${GOAL_DB_NAME:goal_db}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: livenessState
+          additional-path: server:/health
+        readiness:
+          include: readinessState,db
+          additional-path: server:/ready
+logging:
+  level:
+    root: ${LOG_LEVEL:INFO}
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    disable-swagger-default-url: true

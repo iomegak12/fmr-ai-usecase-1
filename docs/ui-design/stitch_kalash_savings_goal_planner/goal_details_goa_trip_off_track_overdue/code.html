@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-container": "#fffbff", "inverse-primary": "#ffb786", "surface-dim": "#dfd9d1", "on-secondary-fixed-variant": "#444173", "surface-container-lowest": "#ffffff", "secondary-fixed": "#e3dfff", "on-secondary-container": "#514f81", "outline-variant": "#dac2b3", "inverse-surface": "#33302b", "secondary": "#5b598c", "secondary-fixed-dim": "#c4c1fb", "on-secondary": "#ffffff", "surface": "#fff8f1", "tertiary": "#186a22", "tertiary-fixed": "#a3f69c", "secondary-container": "#c7c3fe", "on-surface": "#1e1b17", "surface-container-highest": "#e8e1da", "on-primary": "#ffffff", "surface-container-high": "#eee7df", "surface-tint": "#954a00", "outline": "#877367", "on-primary-fixed": "#311400", "surface-container": "#f4ede5", "surface-container-low": "#f9f3eb", "on-surface-variant": "#544338", "on-secondary-fixed": "#181445", "surface-bright": "#fff8f1", "on-primary-fixed-variant": "#723600", "surface-variant": "#e8e1da", "error": "#ba1a1a", "on-error-container": "#93000a", "primary": "#924800", "on-tertiary-fixed": "#002204", "error-container": "#ffdad6", "on-tertiary-container": "#f7fff1", "primary-fixed-dim": "#ffb786", "on-background": "#1e1b17", "tertiary-fixed-dim": "#88d982", "tertiary-container": "#358438", "background": "#fff8f1", "on-error": "#ffffff", "primary-fixed": "#ffdcc6", "inverse-on-surface": "#f7f0e8", "primary-container": "#b25f18", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#005312" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }, spacing: { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-tablet": "1.5rem", "margin-desktop": "4rem", "space-lg": "1.5rem", "margin": "1rem", "margin-tablet": "2rem", "gutter": "1rem", "space-sm": "0.5rem", "gutter-desktop": "2rem" }, fontFamily: { "label-lg": ["Inter"], "currency-md": ["Inter"], "body-md": ["Inter"], "headline-md": ["Epilogue"], "display": ["Epilogue"], "headline-sm": ["Epilogue"], "body-lg": ["Inter"], "body-sm": ["Inter"], "currency-display": ["Inter"], "display-mobile": ["Epilogue"], "label-sm": ["Inter"], "headline-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "label-md": ["Inter"] }, fontSize: { "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "currency-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "currency-display": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;background-color:#fff8f1;color:#1e1b17;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-full text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Kalash Pot Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UjBVCdD5JsGJZFA5FX5cKrQ2nGP7F66_8p0XwzkAOZ2_2e-C3KKXR_b4JsUe8pbEYF980n9moC6DPh8tcqYc-fknhGMm9MrgJkZesWsaFsz0Njd9Wvi7sSZ_t6a2osRKhYUNpP2Q7ESR78lg8fJYHzOpMRRVZOh8Gl1C9nhS81wnzLMuXCUmvoW9moVXviVyvUG7uIrAzKeT7-arhpmX0Up5jXYV0W56wtjaSV348G2fFJmqL6qu4PQg"/><div class="flex flex-col"><h1 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Goal Details</h1><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Kalash</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Log out" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">logout</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface px-margin"><div class="flex flex-col w-full pb-10 space-y-space-md">
+<!-- Sub-navigation context bar -->
+<div class="flex items-center justify-between py-space-xs">
+<button class="inline-flex items-center gap-space-xs text-on-surface-variant hover:text-primary transition-colors" onclick="history.back()" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-label-md text-label-md">My Goals</span>
+</button>
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">hourglass_bottom</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Action Needed</span>
+</div>
+</div>
+<!-- Goal Title & Status Badge Cluster -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">beach_access</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Goa Trip</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Vessel: Friends Vacation Pot</p>
+</div>
+</div>
+<button aria-label="More goal actions" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" id="menuTrigger">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<!-- Overflow Popup Menu (Hidden by default) -->
+<div class="hidden relative z-30 self-end -mt-1 w-48 bg-surface-container-lowest rounded-xl shadow-xl p-1.5 space-y-1" id="overflowMenu">
+<button class="w-full text-left px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span> Share Pot
+      </button>
+<button class="w-full text-left px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">pause_circle</span> Pause Auto-Debit
+      </button>
+<button class="w-full text-left px-3 py-2 rounded-lg font-label-md text-label-md text-error hover:bg-error-container hover:text-on-error-container flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">cancel</span> Cancel Goal
+      </button>
+</div>
+<!-- Pill Status Chips -->
+<div class="flex flex-wrap items-center gap-1.5 pt-1">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed">
+        Active
+      </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-fixed text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+        Off-track
+      </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+        Overdue
+      </span>
+</div>
+</div>
+<!-- Urgent Alert Banner -->
+<div class="relative overflow-hidden rounded-xl bg-error-container p-4 text-on-error-container shadow-sm space-y-3">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-full bg-error text-on-error flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="space-y-1 flex-1">
+<h3 class="font-headline-sm text-headline-sm font-semibold leading-snug">Target date has passed</h3>
+<p class="font-body-md text-body-md opacity-90 leading-relaxed">
+          The deadline of 10 Oct 2024 is behind us. Extend the date, calibrate your monthly target, or safely wind down this vessel.
+        </p>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2 pt-1 pl-11">
+<button class="px-3.5 py-2 rounded-lg bg-error text-on-error font-label-md text-label-md hover:opacity-95 active:scale-95 transition-all shadow-sm" type="button">
+        Extend Date
+      </button>
+<button class="px-3.5 py-2 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md hover:bg-surface-container active:scale-95 transition-all shadow-sm" type="button">
+        Adjust Target
+      </button>
+</div>
+</div>
+<!-- Overdue Hero Vessel Card -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-5 shadow-sm space-y-5">
+<div class="flex items-center justify-between">
+<div class="space-y-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Accumulation Status</span>
+<div class="flex items-baseline gap-2">
+<span class="font-currency-display text-currency-display text-on-surface tracking-tight">₹12,000</span>
+<span class="font-body-md text-body-md text-on-surface-variant font-medium">/ ₹50,000</span>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="px-3 py-1 rounded-full bg-primary-fixed text-primary font-headline-sm text-headline-sm font-bold">
+          24.0%
+        </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-1">Filled</span>
+</div>
+</div>
+<!-- Kalash Vessel Fluid Progress Track -->
+<div class="space-y-2">
+<div class="relative w-full h-4 rounded-full bg-surface-container overflow-hidden">
+<!-- Progress dynamic fill -->
+<div class="absolute left-0 top-0 bottom-0 bg-primary rounded-full transition-all duration-700 ease-out" style="width: 24%;">
+<!-- Subtle liquid shimmer overlay -->
+<div class="w-full h-full bg-surface-container-lowest opacity-25"></div>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="font-label-sm text-label-sm font-semibold text-primary">₹38,000 remaining</span>
+<span class="font-label-sm text-label-sm flex items-center gap-1 text-error font-medium">
+<span class="material-symbols-outlined text-[13px]">event_busy</span>
+          Target: 10 Oct 2024 (Overdue)
+        </span>
+</div>
+</div>
+<!-- Micro Photo Thumbnail of Destination for emotional recall -->
+<div class="relative w-full h-28 rounded-xl overflow-hidden shadow-inner flex items-end p-3">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="Golden sand beach of South Goa during warm sunset with swaying palm trees, gentle sea waves reflecting amber light, soft vacation mood in documentary photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGVhVNaSyoQ3BgCUsGhaXG2_ECF7HXVDlA2x7ThRZ62GQ-iFgLf7faAy8DfuIHJ-LAkK-lXtNSWF3CFWZQtV9lqgPfEPsJfZLWvG2OKOfAyS31PA5D0yt9VxwXrIp5BziPtxf9kvj1P_HUV3SR-FBXtNd-E5szzC8buQlA_G4L0Kh3Vj3BqCbgo4y_5ZD9xZEQqctQcOqjmjTI1igPv-Wl5eBFIKJPPDxgGavN6CNJPdZ984iOh2Kl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/30 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between w-full text-on-primary-container">
+<span class="font-label-md text-label-md drop-shadow">South Goa Retreat • 4 Friends</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container-lowest/80 text-on-surface backdrop-blur-md">Beach &amp; Stay</span>
+</div>
+</div>
+</div>
+<!-- Insights Row: 3 Responsive Metric Tiles -->
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Card 1: Suggested Monthly -->
+<div class="flex flex-col justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm min-w-0">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">calculate</span>
+<span class="font-label-sm text-label-sm truncate">Recalibrated</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface truncate">₹12,500<span class="text-[10px] font-normal text-on-surface-variant">/mo</span></p>
+<p class="font-label-sm text-label-sm text-primary truncate mt-0.5">3-mo recovery</p>
+</div>
+</div>
+<!-- Card 2: Health Pace -->
+<div class="flex flex-col justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm min-w-0">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">speed</span>
+<span class="font-label-sm text-label-sm truncate">Pace</span>
+</div>
+<div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary shrink-0"></span>
+<p class="font-label-lg text-label-lg text-on-surface truncate">Off-track</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate mt-0.5">₹26k behind</p>
+</div>
+</div>
+<!-- Card 3: Time Horizon -->
+<div class="flex flex-col justify-between p-3 rounded-xl bg-surface-container-lowest shadow-sm min-w-0">
+<div class="flex items-center gap-1 text-on-surface-variant mb-1.5">
+<span class="material-symbols-outlined text-[16px] text-error">calendar_clock</span>
+<span class="font-label-sm text-label-sm truncate">Horizon</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-error truncate">0 days</p>
+<p class="font-label-sm text-label-sm text-error font-medium truncate mt-0.5">Overdue</p>
+</div>
+</div>
+</div>
+<!-- Primary Action Block -->
+<div class="space-y-2 pt-1">
+<button class="w-full h-12 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.99] transition-all shadow-md" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+      + Deposit to Goal
+    </button>
+<div class="grid grid-cols-2 gap-2">
+<button class="h-11 rounded-xl bg-surface-container-lowest text-on-surface font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-[0.99] transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">edit_calendar</span>
+        Extend / Edit
+      </button>
+<button class="h-11 rounded-xl bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md flex items-center justify-center gap-1.5 hover:bg-surface-container active:scale-[0.99] transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+        Withdraw
+      </button>
+</div>
+</div>
+<!-- Recent Transactions Section -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Vessel History</h4>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-container text-on-surface-variant">3 recent</span>
+</div>
+<button class="font-label-md text-label-md text-primary hover:underline flex items-center gap-0.5" type="button">
+        View all transactions
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Transaction Stack (3 latest) -->
+<div class="rounded-2xl bg-surface-container-lowest p-2 shadow-sm space-y-1">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">savings</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Manual Deposit</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">02 Oct 2024 • UPI Transfer</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-currency-md text-currency-md text-tertiary">+₹2,000</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Success</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">autorenew</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Monthly Auto-fill</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">10 Sep 2024 • Mandate</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-currency-md text-currency-md text-tertiary">+₹5,000</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Success</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-xl hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">autorenew</span>
+</div>
+<div>
+<p class="font-label-lg text-label-lg text-on-surface">Monthly Auto-fill</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">10 Aug 2024 • Mandate</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-currency-md text-currency-md text-tertiary">+₹5,000</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Success</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Gentle Advisory Note -->
+<div class="p-3.5 rounded-xl bg-surface-container flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-primary shrink-0">spa</span>
+<p class="font-body-sm text-body-sm leading-relaxed">
+      Goals take pauses, but disciplined rituals keep going. Extend your date to reset your pace without penalties.
+    </p>
+</div>
+</div>
+<script>
+  (function() {
+    const trigger = document.getElementById('menuTrigger');
+    const menu = document.getElementById('overflowMenu');
+    if (trigger && menu) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('hidden');
+      });
+      document.addEventListener('click', () => {
+        if (!menu.classList.contains('hidden')) {
+          menu.classList.add('hidden');
+        }
+      });
+    }
+  })();
+</script></main></body></html>

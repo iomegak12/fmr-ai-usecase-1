@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-container": "#fffbff", "inverse-primary": "#ffb786", "surface-dim": "#dfd9d1", "on-secondary-fixed-variant": "#444173", "surface-container-lowest": "#ffffff", "secondary-fixed": "#e3dfff", "on-secondary-container": "#514f81", "outline-variant": "#dac2b3", "inverse-surface": "#33302b", "secondary": "#5b598c", "secondary-fixed-dim": "#c4c1fb", "on-secondary": "#ffffff", "surface": "#fff8f1", "tertiary": "#186a22", "tertiary-fixed": "#a3f69c", "secondary-container": "#c7c3fe", "on-surface": "#1e1b17", "surface-container-highest": "#e8e1da", "on-primary": "#ffffff", "surface-container-high": "#eee7df", "surface-tint": "#954a00", "outline": "#877367", "on-primary-fixed": "#311400", "surface-container": "#f4ede5", "surface-container-low": "#f9f3eb", "on-surface-variant": "#544338", "on-secondary-fixed": "#181445", "surface-bright": "#fff8f1", "on-primary-fixed-variant": "#723600", "surface-variant": "#e8e1da", "error": "#ba1a1a", "on-error-container": "#93000a", "primary": "#924800", "on-tertiary-fixed": "#002204", "error-container": "#ffdad6", "on-tertiary-container": "#f7fff1", "primary-fixed-dim": "#ffb786", "on-background": "#1e1b17", "tertiary-fixed-dim": "#88d982", "tertiary-container": "#358438", "background": "#fff8f1", "on-error": "#ffffff", "primary-fixed": "#ffdcc6", "inverse-on-surface": "#f7f0e8", "primary-container": "#b25f18", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#005312" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }, spacing: { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-tablet": "1.5rem", "margin-desktop": "4rem", "space-lg": "1.5rem", "margin": "1rem", "margin-tablet": "2rem", "gutter": "1rem", "space-sm": "0.5rem", "gutter-desktop": "2rem" }, fontFamily: { "label-lg": ["Inter"], "currency-md": ["Inter"], "body-md": ["Inter"], "headline-md": ["Epilogue"], "display": ["Epilogue"], "headline-sm": ["Epilogue"], "body-lg": ["Inter"], "body-sm": ["Inter"], "currency-display": ["Inter"], "display-mobile": ["Epilogue"], "label-sm": ["Inter"], "headline-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "label-md": ["Inter"] }, fontSize: { "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "currency-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "currency-display": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;background-color:#fff8f1;color:#1e1b17;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="Kalash Pot Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UjBVCdD5JsGJZFA5FX5cKrQ2nGP7F66_8p0XwzkAOZ2_2e-C3KKXR_b4JsUe8pbEYF980n9moC6DPh8tcqYc-fknhGMm9MrgJkZesWsaFsz0Njd9Wvi7sSZ_t6a2osRKhYUNpP2Q7ESR78lg8fJYHzOpMRRVZOh8Gl1C9nhS81wnzLMuXCUmvoW9moVXviVyvUG7uIrAzKeT7-arhpmX0Up5jXYV0W56wtjaSV348G2fFJmqL6qu4PQg"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-tight">Kalash</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Fill your pot</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Log out" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">logout</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface px-margin"><div class="flex flex-col w-full pb-8">
+<!-- Header & Primary Action Section -->
+<div class="flex flex-col gap-space-sm pt-2 mb-space-md">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex flex-col">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-secondary-fixed tracking-tight">My Goals</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Fill your pot one goal at a time</p>
+</div>
+<button class="flex items-center justify-center gap-1.5 bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg px-4 py-2.5 rounded-xl shadow-sm active:scale-95 transition-all duration-200 shrink-0">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Goal</span>
+</button>
+</div>
+<!-- Active Sorting & Summary Micro-Bar -->
+<div class="flex items-center justify-between mt-1 px-3 py-2 bg-surface-container rounded-lg">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary">calendar_month</span>
+<span class="font-label-md text-label-md">Sorted by nearest target date</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed">5 Pots</span>
+</div>
+</div>
+<!-- Goal Cards List -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1: Bike Service (Overdue & Off-Track) -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap mb-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold tracking-wider uppercase">Active</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-semibold tracking-wider uppercase">Overdue</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-semibold tracking-wider uppercase">Off-track</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">Bike Service</h2>
+</div>
+<!-- Kalash Pot Mini Visual (60%) -->
+<div class="relative w-11 h-12 flex items-center justify-center shrink-0">
+<svg class="w-10 h-11" fill="none" viewbox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 6C14 4 16 2 20 2C24 2 26 4 26 6" stroke="#924800" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M11 6C15 7.5 25 7.5 29 6" stroke="#186a22" stroke-linecap="round" stroke-width="1.5"></path>
+<!-- Vessel outline -->
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" fill="#F4EDE5"></path>
+<!-- Fill 60% clip -->
+<g clip-path="url(#potClip60)">
+<rect fill="#B25F18" height="20" width="30" x="5" y="22"></rect>
+<ellipse cx="20" cy="22" fill="#FFB786" rx="13" ry="2.5"></ellipse>
+</g>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" stroke="#924800" stroke-linejoin="round" stroke-width="1.5"></path>
+<defs>
+<clippath id="potClip60">
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z"></path>
+</clippath>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Amount Row -->
+<div class="flex items-baseline justify-between mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-currency-md text-currency-md text-on-surface">₹3,000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">of ₹5,000</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary">60.0%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden mb-3">
+<div class="h-full bg-primary-container rounded-full" style="width: 60.0%;"></div>
+</div>
+<!-- Footer Info & Affordance -->
+<div class="flex items-center justify-between text-on-surface-variant pt-2 border-t-0">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-error">event</span>
+<span class="font-label-md text-label-md text-error font-medium">Target: 10 Oct 2026</span>
+</div>
+<div class="flex items-center text-primary group-hover:translate-x-0.5 transition-transform">
+<span class="font-label-sm text-label-sm font-semibold mr-0.5">Details</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 2: New Phone (Off-Track) -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap mb-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold tracking-wider uppercase">Active</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-semibold tracking-wider uppercase">Off-track</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">New Phone</h2>
+</div>
+<!-- Kalash Pot Mini Visual (20%) -->
+<div class="relative w-11 h-12 flex items-center justify-center shrink-0">
+<svg class="w-10 h-11" fill="none" viewbox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 6C14 4 16 2 20 2C24 2 26 4 26 6" stroke="#924800" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M11 6C15 7.5 25 7.5 29 6" stroke="#186a22" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" fill="#F4EDE5"></path>
+<g clip-path="url(#potClip20)">
+<rect fill="#B25F18" height="10" width="30" x="5" y="32"></rect>
+<ellipse cx="20" cy="32" fill="#FFB786" rx="10" ry="2"></ellipse>
+</g>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" stroke="#924800" stroke-linejoin="round" stroke-width="1.5"></path>
+<defs>
+<clippath id="potClip20">
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z"></path>
+</clippath>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Amount Row -->
+<div class="flex items-baseline justify-between mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-currency-md text-currency-md text-on-surface">₹6,000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">of ₹30,000</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary">20.0%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden mb-3">
+<div class="h-full bg-primary rounded-full" style="width: 20.0%;"></div>
+</div>
+<!-- Footer Info & Affordance -->
+<div class="flex items-center justify-between text-on-surface-variant pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-on-surface-variant">event</span>
+<span class="font-label-md text-label-md">Target: 15 Dec 2026</span>
+</div>
+<div class="flex items-center text-primary group-hover:translate-x-0.5 transition-transform">
+<span class="font-label-sm text-label-sm font-semibold mr-0.5">Details</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Goa Trip -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 mb-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-semibold tracking-wider uppercase">Active</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">Goa Trip</h2>
+</div>
+<!-- Kalash Pot Mini Visual (24%) -->
+<div class="relative w-11 h-12 flex items-center justify-center shrink-0">
+<svg class="w-10 h-11" fill="none" viewbox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 6C14 4 16 2 20 2C24 2 26 4 26 6" stroke="#924800" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M11 6C15 7.5 25 7.5 29 6" stroke="#186a22" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" fill="#F4EDE5"></path>
+<g clip-path="url(#potClip24)">
+<rect fill="#B25F18" height="12" width="30" x="5" y="30"></rect>
+<ellipse cx="20" cy="30" fill="#FFB786" rx="10.5" ry="2"></ellipse>
+</g>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" stroke="#924800" stroke-linejoin="round" stroke-width="1.5"></path>
+<defs>
+<clippath id="potClip24">
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z"></path>
+</clippath>
+</defs>
+</svg>
+</div>
+</div>
+<!-- Amount Row -->
+<div class="flex items-baseline justify-between mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-currency-md text-currency-md text-on-surface">₹12,000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">of ₹50,000</span>
+</div>
+<span class="font-label-lg text-label-lg text-primary">24.0%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden mb-3">
+<div class="h-full bg-primary rounded-full" style="width: 24.0%;"></div>
+</div>
+<!-- Footer Info & Affordance -->
+<div class="flex items-center justify-between text-on-surface-variant pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-on-surface-variant">event</span>
+<span class="font-label-md text-label-md">Target: 31 Mar 2027</span>
+</div>
+<div class="flex items-center text-primary group-hover:translate-x-0.5 transition-transform">
+<span class="font-label-sm text-label-sm font-semibold mr-0.5">Details</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Emergency Fund (Achieved / 120.0% Overflow) -->
+<div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-200 relative overflow-hidden group cursor-pointer">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 mb-1.5">
+<span class="flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-semibold tracking-wider uppercase">
+<span class="material-symbols-outlined text-[13px]">check_circle</span>
+              Achieved
+            </span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate">Emergency Fund</h2>
+</div>
+<!-- Kalash Overflow Motif Icon -->
+<div class="relative w-11 h-12 flex items-center justify-center shrink-0">
+<svg class="w-10 h-11" fill="none" viewbox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+<!-- Festive overflow sparks -->
+<path d="M12 4C10 2 8 4 6 5" stroke="#186a22" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M28 4C30 2 32 4 34 5" stroke="#186a22" stroke-linecap="round" stroke-width="1.2"></path>
+<circle cx="20" cy="3" fill="#358438" r="2.5"></circle>
+<path d="M14 6C14 4 16 2 20 2C24 2 26 4 26 6" stroke="#186a22" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M11 6C15 7.5 25 7.5 29 6" stroke="#186a22" stroke-linecap="round" stroke-width="1.5"></path>
+<!-- Vessel completely filled with green -->
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" fill="#358438"></path>
+<ellipse cx="20" cy="11" fill="#88D982" rx="8" ry="2"></ellipse>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" stroke="#186a22" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Amount Row -->
+<div class="flex items-baseline justify-between mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-currency-md text-currency-md text-tertiary">₹1,20,000</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">of ₹1,00,000</span>
+</div>
+<span class="font-label-lg text-label-lg text-tertiary font-bold">120.0%</span>
+</div>
+<!-- Progress Track (Overflow Filled) -->
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden mb-3">
+<div class="h-full bg-tertiary rounded-full relative overflow-hidden" style="width: 100%;">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+<!-- Footer Info & Affordance -->
+<div class="flex items-center justify-between text-on-surface-variant pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-tertiary">verified</span>
+<span class="font-label-md text-label-md text-tertiary font-semibold">Goal Filled • 30 Jun 2027</span>
+</div>
+<div class="flex items-center text-tertiary group-hover:translate-x-0.5 transition-transform">
+<span class="font-label-sm text-label-sm font-semibold mr-0.5">Details</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Card 5: Wedding Gift (Cancelled / Greyed out) -->
+<div class="bg-surface-container-high/60 opacity-65 rounded-2xl p-4 shadow-none relative overflow-hidden cursor-not-allowed">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 mb-1.5">
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-semibold tracking-wider uppercase">Cancelled</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface-variant truncate">Wedding Gift</h2>
+</div>
+<!-- Kalash Pot Empty / Muted -->
+<div class="relative w-11 h-12 flex items-center justify-center shrink-0 grayscale opacity-60">
+<svg class="w-10 h-11" fill="none" viewbox="0 0 40 44" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 6C14 4 16 2 20 2C24 2 26 4 26 6" stroke="#877367" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M11 6C15 7.5 25 7.5 29 6" stroke="#877367" stroke-linecap="round" stroke-width="1.5"></path>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" fill="#E8E1DA"></path>
+<path d="M12 10C8 13 6 18 6 25C6 34 11 40 20 40C29 40 34 34 34 25C34 18 32 13 28 10H12Z" stroke="#877367" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+<!-- Amount Row -->
+<div class="flex items-baseline justify-between mb-2">
+<div class="flex items-baseline gap-1">
+<span class="font-currency-md text-currency-md text-on-surface-variant">₹0</span>
+<span class="font-body-sm text-body-sm text-outline">of ₹15,000</span>
+</div>
+<span class="font-label-lg text-label-lg text-on-surface-variant">0.0%</span>
+</div>
+<!-- Progress Track -->
+<div class="w-full h-2.5 bg-surface-variant rounded-full overflow-hidden mb-3">
+<div class="h-full bg-outline rounded-full" style="width: 0%;"></div>
+</div>
+<!-- Footer Info -->
+<div class="flex items-center justify-between text-outline pt-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">block</span>
+<span class="font-label-md text-label-md">Target: Discontinued</span>
+</div>
+<span class="font-label-sm text-label-sm font-medium">Inactive</span>
+</div>
+</div>
+</div>
+<!-- Pagination Controls -->
+<div class="flex items-center justify-between mt-space-lg px-2 py-3 bg-surface-container-low rounded-xl">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-outline opacity-40 cursor-not-allowed font-label-md text-label-md" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+<span>Previous</span>
+</button>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Page 1 of 1</span>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-outline opacity-40 cursor-not-allowed font-label-md text-label-md" disabled="">
+<span>Next</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/85 backdrop-blur-xl shadow-[0_-2px_12px_rgba(30,27,75,0.04)]" data-active-classes="text-primary font-semibold"><div class="h-16 px-space-sm flex items-center justify-around"><a aria-current="page" class="flex flex-col items-center justify-center min-w-[64px] h-11 transition-colors text-primary font-semibold" data-path="goals-dashboard" href="#"><span class="material-symbols-outlined text-[24px]">savings</span><span class="font-label-md text-label-md mt-0.5">Dashboard</span></a><a class="flex flex-col items-center justify-center min-w-[64px] h-11 text-on-surface-variant transition-colors" data-path="analytics-milestones" href="#"><span class="material-symbols-outlined text-[24px]">insights</span><span class="font-label-md text-label-md mt-0.5">Analytics</span></a></div></nav></body></html>

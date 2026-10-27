@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-container": "#fffbff", "inverse-primary": "#ffb786", "surface-dim": "#dfd9d1", "on-secondary-fixed-variant": "#444173", "surface-container-lowest": "#ffffff", "secondary-fixed": "#e3dfff", "on-secondary-container": "#514f81", "outline-variant": "#dac2b3", "inverse-surface": "#33302b", "secondary": "#5b598c", "secondary-fixed-dim": "#c4c1fb", "on-secondary": "#ffffff", "surface": "#fff8f1", "tertiary": "#186a22", "tertiary-fixed": "#a3f69c", "secondary-container": "#c7c3fe", "on-surface": "#1e1b17", "surface-container-highest": "#e8e1da", "on-primary": "#ffffff", "surface-container-high": "#eee7df", "surface-tint": "#954a00", "outline": "#877367", "on-primary-fixed": "#311400", "surface-container": "#f4ede5", "surface-container-low": "#f9f3eb", "on-surface-variant": "#544338", "on-secondary-fixed": "#181445", "surface-bright": "#fff8f1", "on-primary-fixed-variant": "#723600", "surface-variant": "#e8e1da", "error": "#ba1a1a", "on-error-container": "#93000a", "primary": "#924800", "on-tertiary-fixed": "#002204", "error-container": "#ffdad6", "on-tertiary-container": "#f7fff1", "primary-fixed-dim": "#ffb786", "on-background": "#1e1b17", "tertiary-fixed-dim": "#88d982", "tertiary-container": "#358438", "background": "#fff8f1", "on-error": "#ffffff", "primary-fixed": "#ffdcc6", "inverse-on-surface": "#f7f0e8", "primary-container": "#b25f18", "on-tertiary": "#ffffff", "on-tertiary-fixed-variant": "#005312" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }, spacing: { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "gutter-tablet": "1.5rem", "margin-desktop": "4rem", "space-lg": "1.5rem", "margin": "1rem", "margin-tablet": "2rem", "gutter": "1rem", "space-sm": "0.5rem", "gutter-desktop": "2rem" }, fontFamily: { "label-lg": ["Inter"], "currency-md": ["Inter"], "body-md": ["Inter"], "headline-md": ["Epilogue"], "display": ["Epilogue"], "headline-sm": ["Epilogue"], "body-lg": ["Inter"], "body-sm": ["Inter"], "currency-display": ["Inter"], "display-mobile": ["Epilogue"], "label-sm": ["Inter"], "headline-lg": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "label-md": ["Inter"] }, fontSize: { "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }], "currency-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }], "display": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "16px", fontWeight: "400" }], "currency-display": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "600" }], "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100%;margin:0;padding:0;min-height:100%;}body{overscroll-behavior-y:none;background-color:#fff8f1;color:#1e1b17;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface antialiased flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs flex items-center justify-center rounded-full text-on-surface hover:text-primary transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Kalash Pot Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UjBVCdD5JsGJZFA5FX5cKrQ2nGP7F66_8p0XwzkAOZ2_2e-C3KKXR_b4JsUe8pbEYF980n9moC6DPh8tcqYc-fknhGMm9MrgJkZesWsaFsz0Njd9Wvi7sSZ_t6a2osRKhYUNpP2Q7ESR78lg8fJYHzOpMRRVZOh8Gl1C9nhS81wnzLMuXCUmvoW9moVXviVyvUG7uIrAzKeT7-arhpmX0Up5jXYV0W56wtjaSV348G2fFJmqL6qu4PQg"/><div class="flex flex-col"><h1 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Goal Details</h1><span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Kalash</span></div></div><div class="flex items-center gap-space-sm"><button aria-label="Log out" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[22px]">logout</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface px-margin"><div class="flex flex-col w-full pb-8 space-y-4">
+<!-- Back navigation sub-bar -->
+<div class="flex items-center justify-between pt-2">
+<a class="inline-flex items-center gap-1 text-primary hover:opacity-80 transition-opacity font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>My Goals</span>
+</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">ID: #KL-8821</span>
+</div>
+<!-- Header Area: Title & Status Badges -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">beach_access</span>
+</div>
+<div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Goa Trip</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sun, sand &amp; disciplined wealth</p>
+</div>
+</div>
+<!-- Badges Stack -->
+<div class="flex flex-col items-end gap-1.5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm tracking-wider uppercase font-semibold">
+          Active
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+          On Track
+        </span>
+</div>
+</div>
+</div>
+<!-- Hero Card: The Kalash Vessel Filling Experience -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-5 shadow-sm relative overflow-hidden flex flex-col items-center">
+<!-- Subtle Ambient Glow -->
+<div class="absolute -top-12 -right-12 w-40 h-40 bg-primary-fixed-dim/20 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Kalash Vessel Interactive Gauge Visual -->
+<div class="relative w-44 h-48 flex items-center justify-center my-1">
+<svg class="w-full h-full drop-shadow-sm" fill="none" viewbox="0 0 160 170" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<!-- Copper Fluid Gradient -->
+<lineargradient gradientunits="userSpaceOnUse" id="copperLiquid" x1="80" x2="80" y1="145" y2="70">
+<stop offset="0%" stop-color="#924800"></stop>
+<stop offset="50%" stop-color="#b25f18"></stop>
+<stop offset="100%" stop-color="#ffb786"></stop>
+</lineargradient>
+<!-- Pot Inner Vessel Mask -->
+<clippath id="kalashMask">
+<path d="M50 48C45 58 26 78 26 108C26 136 50 152 80 152C110 152 134 136 134 108C134 78 115 58 110 48H50Z"></path>
+</clippath>
+</defs>
+<!-- Kalash Outline Silhouette / Clay Base Backdrop -->
+<!-- Coconut & Mango Leaves on Top (Traditional Kalash Motif) -->
+<path d="M80 16L92 36C88 38 72 38 68 36L80 16Z" fill="#358438" opacity="0.9"></path>
+<path d="M66 26C54 32 50 42 56 46C64 46 72 38 72 34L66 26Z" fill="#186a22" opacity="0.8"></path>
+<path d="M94 26C106 32 110 42 104 46C96 46 88 38 88 34L94 26Z" fill="#186a22" opacity="0.8"></path>
+<!-- Top Rim Base -->
+<rect fill="#eee7df" height="8" rx="4" width="68" x="46" y="42"></rect>
+<!-- Empty Vessel Body Outer -->
+<path d="M50 48C45 58 26 78 26 108C26 136 50 152 80 152C110 152 134 136 134 108C134 78 115 58 110 48H50Z" fill="#f4ede5"></path>
+<!-- Liquid Accumulation (Masked to Vessel Inner, 24% fill level height ~30px from bottom) -->
+<g clip-path="url(#kalashMask)">
+<!-- Liquid Fill Base -->
+<rect fill="url(#copperLiquid)" height="32" width="120" x="20" y="126"></rect>
+<!-- Animated Liquid Wave Surface -->
+<path d="M20 126 C 45 122, 65 129, 85 125 C 105 121, 125 128, 145 125 L 145 158 L 20 158 Z" fill="#b25f18">
+<animate attributename="d" dur="3s" repeatcount="indefinite" values="
+              M20 126 C 45 122, 65 129, 85 125 C 105 121, 125 128, 145 125 L 145 158 L 20 158 Z;
+              M20 125 C 45 128, 65 122, 85 127 C 105 123, 125 126, 145 124 L 145 158 L 20 158 Z;
+              M20 126 C 45 122, 65 129, 85 125 C 105 121, 125 128, 145 125 L 145 158 L 20 158 Z
+            "></animate>
+</path>
+<!-- Surface Froth / Gold Reflection Highlight -->
+<ellipse cx="80" cy="125" fill="#ffdcc6" opacity="0.6" rx="36" ry="2.5"></ellipse>
+</g>
+<!-- Subtle Glass / Vessel Sheen Highlight -->
+<path d="M38 75C34 88 34 112 44 130" opacity="0.75" stroke="#ffffff" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<!-- Central Percentage Floating Badge -->
+<div class="absolute bottom-5 bg-surface-container-lowest/95 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline-sm text-headline-sm text-primary">24.0%</span>
+</div>
+</div>
+<!-- Primary Metrics Display -->
+<div class="text-center mt-2">
+<div class="flex items-baseline justify-center gap-1.5">
+<span class="font-currency-display text-currency-display text-on-surface font-bold">₹12,000</span>
+<span class="font-body-md text-body-md text-on-surface-variant font-medium">saved</span>
+</div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-0.5">
+        Target: <span class="font-label-lg text-label-lg text-on-surface">₹50,000</span>
+</div>
+</div>
+<!-- Remaining & Deadline Info Pill -->
+<div class="w-full mt-4 pt-3.5 bg-surface-container-low rounded-xl px-4 py-2.5 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">hourglass_bottom</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant"><strong class="font-label-md text-label-md text-on-surface">₹38,000</strong> remaining</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">event</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">31 Mar 2027</span>
+</div>
+</div>
+</div>
+<!-- Insights Row: Compact Three Metric Cards -->
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Suggested Monthly -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Monthly</span>
+<div class="mt-2">
+<div class="font-label-lg text-label-lg text-on-surface font-bold">₹7,600</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">per month</span>
+</div>
+</div>
+<!-- Health Pace -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Pace</span>
+<div class="mt-2 flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-lg text-label-lg font-bold">On track</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">No delays</span>
+</div>
+<!-- Time Horizon -->
+<div class="bg-surface-container-lowest rounded-xl p-3 shadow-sm flex flex-col justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Horizon</span>
+<div class="mt-2">
+<div class="font-label-lg text-label-lg text-on-surface font-bold">374</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">days left</span>
+</div>
+</div>
+</div>
+<!-- Actions Layout -->
+<div class="flex flex-col gap-2.5 pt-1">
+<!-- Primary Quick Deposit Button -->
+<button class="w-full h-12 bg-primary text-on-primary rounded-xl font-label-lg text-label-lg font-semibold flex items-center justify-center gap-2 shadow-sm active:scale-[0.99] transition-transform hover:opacity-95" id="depositBtn">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>+ Deposit Money</span>
+</button>
+<!-- Secondary Row Actions with Overflow Dropdown -->
+<div class="grid grid-cols-5 gap-2 relative">
+<button class="col-span-2 h-11 bg-surface-container-lowest text-on-surface rounded-xl font-label-md text-label-md font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-[0.99] transition-transform hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">arrow_outward</span>
+<span>Withdraw</span>
+</button>
+<button class="col-span-2 h-11 bg-surface-container-lowest text-on-surface rounded-xl font-label-md text-label-md font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-[0.99] transition-transform hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">edit</span>
+<span>Edit Goal</span>
+</button>
+<!-- Overflow Menu Button -->
+<div class="col-span-1 relative">
+<button aria-label="More actions" class="w-full h-11 bg-surface-container-lowest text-on-surface-variant rounded-xl flex items-center justify-center shadow-sm active:scale-[0.99] transition-transform hover:bg-surface-container-low" id="overflowBtn">
+<span class="material-symbols-outlined text-[22px]">more_horiz</span>
+</button>
+<!-- Dropdown Menu Sheet -->
+<div class="hidden absolute right-0 bottom-14 w-44 bg-surface-container-lowest rounded-xl shadow-lg p-1.5 z-30" id="overflowMenu">
+<button class="w-full px-3 py-2 text-left flex items-center gap-2 rounded-lg text-on-surface hover:bg-surface-container font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">pause</span>
+<span>Pause Goal</span>
+</button>
+<button class="w-full px-3 py-2 text-left flex items-center gap-2 rounded-lg text-error hover:bg-error-container font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span>Cancel Goal</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Discipline Note / Delight Banner -->
+<div class="w-full bg-primary-fixed/40 rounded-xl p-3.5 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5" style="font-variation-settings: 'FILL' 1;">spa</span>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface font-semibold">Slow &amp; Steady Accumulation</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Automating ₹250 every weekend cuts 42 days off your Goa getaway timeline.</p>
+</div>
+</div>
+<!-- Recent Transactions Section -->
+<div class="flex flex-col gap-2.5 pt-2">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Transactions</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Last 3 deposits</span>
+</div>
+<!-- Transaction List Card -->
+<div class="bg-surface-container-lowest rounded-xl p-2 shadow-sm flex flex-col space-y-1">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">UPI Auto-save</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">24 May 2025 • Auto-debit</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-lg text-label-lg text-tertiary font-bold">+₹5,000</div>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 font-semibold">Settled</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">savings</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Weekend Cutdown</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">10 May 2025 • Manual add</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-lg text-label-lg text-tertiary font-bold">+₹4,000</div>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 font-semibold">Settled</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-2.5 rounded-lg hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">featured_seasonal_and_gifts</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-semibold">Gift Money</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">18 Apr 2025 • Bonus transfer</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-label-lg text-label-lg text-tertiary font-bold">+₹3,000</div>
+<span class="inline-flex items-center px-1.5 py-0.2 rounded font-label-sm text-label-sm text-tertiary bg-tertiary-fixed/60 font-semibold">Settled</span>
+</div>
+</div>
+</div>
+<!-- Link to full history -->
+<a class="w-full py-2.5 text-center text-primary font-label-md text-label-md font-semibold hover:opacity-80 transition-opacity flex items-center justify-center gap-1" href="#">
+<span>View all transactions</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Deposit Bottom Sheet / Modal (Micro-interaction) -->
+<div class="hidden fixed inset-0 z-50 flex items-end justify-center bg-inverse-surface/40 backdrop-blur-sm p-margin pb-safe" id="depositModal">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-2xl p-5 shadow-xl flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[24px]">water_drop</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fill the Kalash</h3>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container" id="closeModalBtn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Add money towards your <strong class="text-on-surface">Goa Trip</strong> pot right now via UPI.</p>
+<!-- Preset Pills -->
+<div class="grid grid-cols-3 gap-2">
+<button class="preset-amt py-2 rounded-xl bg-surface-container-low font-label-md text-label-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-semibold" data-val="1000">+₹1,000</button>
+<button class="preset-amt py-2 rounded-xl bg-surface-container-low font-label-md text-label-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-semibold" data-val="2500">+₹2,500</button>
+<button class="preset-amt py-2 rounded-xl bg-surface-container-low font-label-md text-label-md text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-semibold" data-val="5000">+₹5,000</button>
+</div>
+<!-- Currency Input Display -->
+<div class="relative flex items-center bg-surface-container-low rounded-xl px-4 py-3">
+<span class="font-headline-md text-headline-md text-on-surface mr-2 font-bold">₹</span>
+<input class="w-full bg-transparent font-currency-md text-currency-md text-on-surface focus:outline-none" id="depositInput" placeholder="Enter amount" type="number" value="2500"/>
+</div>
+<button class="w-full h-12 bg-primary text-on-primary rounded-xl font-label-lg text-label-lg font-semibold flex items-center justify-center gap-1.5 shadow-sm active:scale-[0.99] transition-transform" id="confirmDepositBtn">
+<span>Proceed with UPI</span>
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  // Simple micro-interactions for overflow menu and quick deposit sheet
+  const overflowBtn = document.getElementById('overflowBtn');
+  const overflowMenu = document.getElementById('overflowMenu');
+  const depositBtn = document.getElementById('depositBtn');
+  const depositModal = document.getElementById('depositModal');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+  const depositInput = document.getElementById('depositInput');
+  const confirmDepositBtn = document.getElementById('confirmDepositBtn');
+  const presetBtns = document.querySelectorAll('.preset-amt');
+
+  if (overflowBtn && overflowMenu) {
+    overflowBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      overflowMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', () => {
+      if (!overflowMenu.classList.contains('hidden')) {
+        overflowMenu.classList.add('hidden');
+      }
+    });
+  }
+
+  if (depositBtn && depositModal && closeModalBtn) {
+    depositBtn.addEventListener('click', () => {
+      depositModal.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      depositModal.classList.add('hidden');
+    });
+
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (depositInput) {
+          depositInput.value = btn.getAttribute('data-val');
+        }
+      });
+    });
+
+    if (confirmDepositBtn) {
+      confirmDepositBtn.addEventListener('click', () => {
+        confirmDepositBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span> Processing...';
+        setTimeout(() => {
+          depositModal.classList.add('hidden');
+          confirmDepositBtn.innerHTML = '<span>Proceed with UPI</span><span class="material-symbols-outlined text-[18px]">lock</span>';
+        }, 1000);
+      });
+    }
+  }
+</script></main></body></html>

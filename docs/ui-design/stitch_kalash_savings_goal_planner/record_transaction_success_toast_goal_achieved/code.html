@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,600;0,700;1,600&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#924800", "on-tertiary-fixed-variant": "#005312", "on-tertiary": "#ffffff", "on-primary-fixed": "#311400", "on-primary-container": "#fffbff", "surface-variant": "#e8e1da", "on-secondary": "#ffffff", "surface-container": "#f4ede5", "secondary": "#5b598c", "secondary-fixed-dim": "#c4c1fb", "on-background": "#1e1b17", "on-secondary-fixed-variant": "#444173", "outline": "#877367", "on-tertiary-fixed": "#002204", "on-tertiary-container": "#f7fff1", "surface-container-highest": "#e8e1da", "tertiary-fixed-dim": "#88d982", "on-secondary-fixed": "#181445", "primary-fixed-dim": "#ffb786", "error": "#ba1a1a", "inverse-primary": "#ffb786", "surface": "#fff8f1", "background": "#fff8f1", "on-error": "#ffffff", "surface-bright": "#fff8f1", "surface-container-high": "#eee7df", "on-error-container": "#93000a", "primary-fixed": "#ffdcc6", "on-primary": "#ffffff", "surface-tint": "#954a00", "tertiary-fixed": "#a3f69c", "on-primary-fixed-variant": "#723600", "secondary-container": "#c7c3fe", "outline-variant": "#dac2b3", "surface-container-low": "#f9f3eb", "secondary-fixed": "#e3dfff", "on-secondary-container": "#514f81", "inverse-surface": "#33302b", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "tertiary": "#186a22", "on-surface-variant": "#544338", "primary-container": "#b25f18", "surface-dim": "dfd9d1", "inverse-on-surface": "#f7f0e8", "tertiary-container": "#358438", "on-surface": "#1e1b17" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-md": "1rem", "margin-desktop": "4rem", "space-sm": "0.5rem", "gutter-tablet": "1.5rem", "gutter-desktop": "2rem", "space-xs": "0.25rem", "gutter": "1rem", "margin-tablet": "2rem", "margin": "1rem", "space-lg": "1.5rem", "space-xl": "2.5rem" }, fontFamily: { "body-md": ["Inter"], "currency-md": ["Inter"], "headline-md": ["Epilogue"], "headline-lg-mobile": ["Epilogue"], "body-sm": ["Inter"], "headline-sm": ["Epilogue"], "label-md": ["Inter"], "headline-lg": ["Epilogue"], "currency-display": ["Inter"], "label-sm": ["Inter"], "display-mobile": ["Epilogue"], "body-lg": ["Inter"], "display": ["Epilogue"], "label-lg": ["Inter"] }, fontSize: { "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "currency-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "currency-display": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }] } } } }</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="Go back" class="min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface active:scale-95 transition-all" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Kalash sacred pot vector icon logo in warm copper #C8702A with green mango leaves and golden top accent" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHqo0t40LT8lkCHS6-_9LAgjY6EbLTJQuy4q1uaBAK0I7FVuZifXRgH4jzgsRtDq8O-uMxgZCCBIOAGSs34HFyLqG4MRYTqTfuGvr3PjQw3UuVCuqmFYGd52zSlG0kYklxrsQZvi--L-8V9t5FklZPEifLeWvPimfKOP0tjNlCDSgRIn2sInmkgg1PKNN-o2smvoX1SvxmFr9nNqIejMSyPuWgkhiQJ4vxRosaJo4qjOA3fTR8LR62"/><span class="font-headline-sm text-headline-sm text-on-surface truncate ml-space-xs">Goal Details</span></div><div class="flex items-center gap-space-xs"><button aria-label="Close view" class="min-w-[44px] min-h-[44px] flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[22px]">close</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full relative pb-safe">
+<!-- Celebration Petals & Sparkle Canvas Overlay -->
+<canvas class="fixed inset-0 pointer-events-none z-40 w-full h-full" id="marigoldCanvas"></canvas>
+<!-- Ambient Top Toast Notification -->
+<div class="px-gutter pt-space-sm pb-space-xs z-30">
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-xl p-space-md flex items-center justify-between transition-all duration-300 transform translate-y-0">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[22px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-on-surface truncate">Deposit of ₹5,000 recorded</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 27 Oct 2026 • UPI Transfer</span>
+</div>
+</div>
+<div class="shrink-0 pl-space-xs">
+<span class="font-label-md text-label-md text-tertiary font-bold bg-tertiary/10 px-space-xs py-1 rounded-full">Success</span>
+</div>
+</div>
+</div>
+<!-- Hero Milestone Celebration Banner -->
+<div class="px-gutter pt-space-xs pb-space-md z-30">
+<div class="relative overflow-hidden w-full bg-surface-container-lowest rounded-xl shadow-xl p-space-lg flex flex-col items-center text-center">
+<!-- Decorative background glow -->
+<div class="absolute -top-12 -right-12 w-44 h-44 rounded-full bg-primary-fixed/40 blur-2xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -left-10 w-36 h-36 rounded-full bg-tertiary-fixed/30 blur-xl pointer-events-none"></div>
+<!-- Kalash Pot Overflowing Motif (Rich Handcrafted SVG Vessel) -->
+<div class="relative w-28 h-28 my-space-xs flex items-center justify-center">
+<!-- Auspicious Halo Ring -->
+<div class="absolute inset-0 rounded-full bg-primary-fixed-dim/20 animate-ping opacity-60"></div>
+<div class="absolute inset-2 rounded-full bg-primary/10 flex items-center justify-center"></div>
+<svg class="w-24 h-24 drop-shadow-md z-10" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Coconut at top -->
+<ellipse cx="60" cy="38" fill="#723600" rx="14" ry="16"></ellipse>
+<path d="M54 34L60 22L66 34" stroke="#ffb786" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="60" cy="22" fill="#ffdcc6" r="3"></circle>
+<!-- Golden Mango Leaves Garland -->
+<path d="M38 48C45 42 54 42 60 48C66 42 75 42 82 48" stroke="#186a22" stroke-linecap="round" stroke-width="4"></path>
+<path d="M34 52C42 46 52 46 60 52C68 46 78 46 86 52" stroke="#358438" stroke-linecap="round" stroke-width="3"></path>
+<!-- Pot Lip & Neck (Warm Copper #C8702A / #924800) -->
+<path d="M42 52C42 49 78 49 78 52L82 60C78 63 42 63 38 60L42 52Z" fill="#b25f18"></path>
+<!-- Swelling Kalash Pot Body -->
+<path d="M38 60C24 72 26 94 42 104C52 110 68 110 78 104C94 94 96 72 82 60H38Z" fill="#924800"></path>
+<!-- Water overflowing golden reflection ripples -->
+<path d="M36 76C44 70 76 70 84 76" opacity="0.8" stroke="#ffdcc6" stroke-linecap="round" stroke-width="2.5"></path>
+<path d="M42 88C48 84 72 84 78 88" opacity="0.6" stroke="#ffdcc6" stroke-linecap="round" stroke-width="2"></path>
+<!-- Overflow droplets -->
+<circle cx="28" cy="74" fill="#358438" r="2.5"></circle>
+<circle cx="92" cy="76" fill="#ffdcc6" r="2.5"></circle>
+<path d="M30 84C30 84 27 90 29 93C31 96 34 94 34 92C34 89 30 84 30 84Z" fill="#ffdcc6"></path>
+<path d="M90 84C90 84 93 90 91 93C89 96 86 94 86 92C86 89 90 84 90 84Z" fill="#ffdcc6"></path>
+<!-- Sacred Tikka mark on vessel -->
+<circle cx="60" cy="80" fill="#ba1a1a" r="4"></circle>
+<circle cx="60" cy="77" fill="#ffdcc6" r="1.5"></circle>
+</svg>
+</div>
+<!-- Celebration Title & Auspicious Blessing -->
+<div class="inline-flex items-center gap-space-xs bg-tertiary/10 text-tertiary px-space-md py-1 rounded-full mb-space-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-md text-label-md font-bold tracking-wide uppercase">Purna Kalash • Milestone Achieved</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-space-xs font-bold tracking-tight">
+        Goa Trip Vessel Full! 🎉
+      </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs mt-space-xs leading-relaxed">
+        Your Goa Trip vessel is now <span class="text-tertiary font-bold">100.0% full (₹50,000)</span>. The sacred pot overflows with disciplined wealth and quiet optimism.
+      </p>
+<!-- Action Button Group -->
+<div class="flex flex-col w-full gap-space-xs mt-space-lg">
+<button class="w-full h-12 bg-primary hover:bg-primary-container active:scale-[0.99] text-on-primary font-label-lg text-label-lg rounded-xl shadow-md flex items-center justify-center gap-space-xs transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+<span>Celebrate &amp; Share</span>
+</button>
+<button class="w-full h-12 bg-surface-container hover:bg-surface-variant active:scale-[0.99] text-on-surface font-label-lg text-label-lg rounded-xl flex items-center justify-center gap-space-xs transition-all" type="button">
+<span class="material-symbols-outlined text-[20px]">check</span>
+<span>View Updated Vessel</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Primary Goal Details Content (Updated Live State) -->
+<div class="px-gutter flex flex-col gap-space-md">
+<!-- Goal Details Card -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col">
+<!-- Title Bar & Status Chip -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">beach_access</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Goa Trip</h2>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Target Date: Nov 2026</span>
+</div>
+</div>
+<!-- Status Pill: Achieved (#E8F5E9 / #2E7D32) -->
+<span class="h-6 inline-flex items-center px-space-sm rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold uppercase tracking-wider">
+          Achieved
+        </span>
+</div>
+<!-- Balance Metric Highlight -->
+<div class="flex items-baseline justify-between pt-space-xs">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase tracking-wider">Accumulated Wealth</span>
+<span class="font-currency-display text-currency-display text-on-surface font-bold">₹50,000</span>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant block uppercase tracking-wider">Target Goal</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant font-semibold">₹50,000</span>
+</div>
+</div>
+<!-- Liquid Accumulation Gauge (100% Full) -->
+<div class="w-full mt-space-md">
+<div class="relative w-full h-4 bg-surface-container rounded-full overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-full bg-primary rounded-full transition-all duration-1000"></div>
+<!-- Lustrous surface shimmer reflection -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-label-sm text-label-sm text-tertiary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Goal Reached!
+          </span>
+<span class="font-label-md text-label-md text-primary font-bold">100.0% Full</span>
+</div>
+</div>
+</div>
+<!-- Visual Storytelling Tile: Destination Memory -->
+<div class="relative w-full h-40 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Golden hour tropical coastline with serene palm trees bathed in warm copper sunlight, quiet beach waves gently reflecting twilight amber tones in a minimalist peaceful mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO2OPc3UufmWEIYYrYXWA54f8DJPFaMUm1MjsR7OjzJyEFmeQSZSyoybCEewJ5tywqcb3VpXs4TLFVjv5FsWIV6BQTPgF8z8UtiPnuZ_3HCspAUx6GgcK1wiPpeKGJsfbBpCJVELk9yQ8Z1Fw3fF6jygSpcJdIw_JS3GAVFwJeFXjLxATGBexdt4Hxgmaj0eYqXeIVGPYF7QNRi3aaaYFQVJn4V8UlxuvcMyQzASlRZqihZoGP36V2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-inverse-surface/20 to-transparent flex flex-col justify-end p-space-md text-on-primary">
+<span class="font-label-sm text-label-sm tracking-wider uppercase opacity-90">Planned Itinerary</span>
+<span class="font-headline-sm text-headline-sm font-semibold">Sunsets at Palolem Beach</span>
+</div>
+</div>
+<!-- Disciplined Insights Section (Updated values) -->
+<div class="w-full bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Savings Intelligence</h3>
+<div class="grid grid-cols-2 gap-space-sm">
+<!-- Monthly requirement shifted to 0 -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Monthly Needed</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold mt-1">₹0<span class="font-body-sm text-body-sm text-on-surface-variant font-normal">/mo</span></span>
+<span class="font-body-sm text-body-sm text-tertiary font-medium mt-1">Target satisfied</span>
+</div>
+<!-- Time saved metric -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pace Advantage</span>
+<span class="font-headline-md text-headline-md text-tertiary font-bold mt-1">+14 Days</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-1">Ahead of deadline</span>
+</div>
+</div>
+<!-- Recent Deposit Entry in Ledger -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold uppercase tracking-wider">Milestone Ledger</span>
+<div class="flex items-center justify-between py-space-sm bg-surface-container-low/60 px-space-md rounded-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-semibold text-on-surface block">Final Allocation</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">27 Oct 2026 • Self-transfer</span>
+</div>
+</div>
+<span class="font-currency-md text-currency-md text-tertiary font-bold">+₹5,000</span>
+</div>
+</div>
+</div>
+<!-- Micro Reflection Card -->
+<div class="w-full bg-surface-container p-space-md rounded-xl flex items-center gap-space-md mb-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 text-primary">
+<span class="material-symbols-outlined text-[20px]">local_florist</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+        "Every small copper drop placed patiently fills the vessel without strain." You reached this milestone with 8 automated contributions.
+      </p>
+</div>
+</div>
+<!-- Marigold Petal Particle Animation Script -->
+<script>
+    (function () {
+      const canvas = document.getElementById('marigoldCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      // Warm marigold & festive palette
+      const colors = ['#C8702A', '#E58E26', '#F8B739', '#2E7D32', '#F5E8D8'];
+
+      const petals = Array.from({ length: 38 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * -height * 0.5,
+        size: Math.random() * 7 + 5,
+        speedY: Math.random() * 2.2 + 1.2,
+        speedX: Math.sin(Math.random() * Math.PI) * 1.5,
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 4,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        opacity: Math.random() * 0.7 + 0.3
+      }));
+
+      function render() {
+        ctx.clearRect(0, 0, width, height);
+
+        petals.forEach((p) => {
+          p.y += p.speedY;
+          p.x += Math.sin(p.y / 25) * 0.8;
+          p.rotation += p.rotSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color;
+
+          // Draw organic teardrop petal
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size, p.size * 0.6, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+
+          // Reset looping petals to top
+          if (p.y > height + 20) {
+            p.y = -20;
+            p.x = Math.random() * width;
+          }
+        });
+
+        requestAnimationFrame(render);
+      }
+
+      render();
+    })();
+  </script>
+</div></main></body></html>

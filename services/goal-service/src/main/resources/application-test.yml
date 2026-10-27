@@ -1,0 +1,19 @@
+spring:
+  main:
+    banner-mode: off
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration
+      - org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration
+      - org.springframework.boot.data.jpa.autoconfigure.DataJpaRepositoriesAutoConfiguration
+  output:
+    ansi:
+      enabled: never
+management:
+  endpoint:
+    health:
+      group:
+        readiness:
+          include: readinessState
+app:
+  timezone: Asia/Kolkata

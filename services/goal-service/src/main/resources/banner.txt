@@ -1,0 +1,2 @@
+  K A L A S H
+  Goal Service :: ${application.version}

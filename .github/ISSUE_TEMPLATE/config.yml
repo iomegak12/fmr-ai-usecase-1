@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: mailto:jd.ramkumar@gmail.com
+    about: Email vulnerabilities privately; do not open a public issue.
+  - name: Code of Conduct report
+    url: mailto:jd.ramkumar@gmail.com
+    about: Contact Ramkumar JD privately about community conduct.
