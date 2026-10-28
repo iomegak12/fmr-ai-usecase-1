@@ -1,0 +1,157 @@
+# Deployment (plan Section 5.9, LLD Section 28): runs
+# `docker compose pull && docker compose up -d` on the target host over SSH.
+#
+# Runs on demand (choose a release version or a 7-character git SHA), or when
+# a GitHub release is published. It waits until all three images with that tag
+# are in the registry, copies the root docker-compose.yml to the host, then
+# pulls and starts the stack. The host keeps its own .env (database passwords)
+# in DEPLOY_PATH and must already be logged in to the registry.
+#
+# Until the host and registry are chosen (plan Open Issues 1 and 2) the deploy
+# job is skipped with a notice. Configure, in the repository settings:
+#   variables  KALASH_REGISTRY, DEPLOY_HOST, DEPLOY_USER, DEPLOY_PATH
+#   secrets    DEPLOY_SSH_KEY, DEPLOY_KNOWN_HOSTS,
+#              REGISTRY_USERNAME and REGISTRY_PASSWORD (to check the images)
+# and an environment named "production" (add required reviewers there to
+# approve each deployment).
+
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Image tag to deploy, for example 1.0.0 or a 7-character git SHA
+        required: true
+        type: string
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      enabled: ${{ steps.plan.outputs.enabled }}
+      version: ${{ steps.plan.outputs.version }}
+    steps:
+      - name: Choose the version and check the configuration
+        id: plan
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          REGISTRY: ${{ vars.KALASH_REGISTRY }}
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+        run: |
+          set -euo pipefail
+          version=${INPUT_VERSION:-${RELEASE_TAG#v}}
+          if ! [[ $version =~ ^[0-9A-Za-z][0-9A-Za-z._-]{0,127}$ ]]; then
+            echo "::error::'$version' is not a valid image tag."
+            exit 1
+          fi
+          enabled=true
+          if [ -z "$REGISTRY" ] || [ -z "$DEPLOY_HOST" ] || [ -z "$DEPLOY_USER" ] || [ -z "$DEPLOY_PATH" ]; then
+            enabled=false
+            echo "::notice::Deployment of $version skipped: set KALASH_REGISTRY, DEPLOY_HOST, DEPLOY_USER and DEPLOY_PATH (plan Open Issues 1 and 2)."
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "enabled=$enabled" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: plan
+    if: needs.plan.outputs.enabled == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    environment: production
+    env:
+      VERSION: ${{ needs.plan.outputs.version }}
+      REGISTRY: ${{ vars.KALASH_REGISTRY }}
+      DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+      DEPLOY_USER: ${{ vars.DEPLOY_USER }}
+      DEPLOY_PATH: ${{ vars.DEPLOY_PATH }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check the settings used in remote commands
+        run: |
+          set -euo pipefail
+          [[ $REGISTRY =~ ^[A-Za-z0-9._:/-]+$ ]] || { echo "::error::KALASH_REGISTRY has unexpected characters."; exit 1; }
+          [[ $DEPLOY_HOST =~ ^[A-Za-z0-9._:-]+$ ]] || { echo "::error::DEPLOY_HOST has unexpected characters."; exit 1; }
+          [[ $DEPLOY_USER =~ ^[A-Za-z0-9._-]+$ ]] || { echo "::error::DEPLOY_USER has unexpected characters."; exit 1; }
+          [[ $DEPLOY_PATH =~ ^[A-Za-z0-9._/~-]+$ ]] || { echo "::error::DEPLOY_PATH has unexpected characters."; exit 1; }
+
+      - name: Log in to the registry
+        env:
+          USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -n "$USERNAME" ] && [ -n "$PASSWORD" ]; then
+            printf '%s' "$PASSWORD" | docker login "${REGISTRY%%/*}" --username "$USERNAME" --password-stdin
+          else
+            echo "::notice::No registry credentials; checking the images anonymously."
+          fi
+
+      - name: Wait for the images
+        run: |
+          set -euo pipefail
+          for image in gateway goal-service transaction-service; do
+            reference="$REGISTRY/kalash/$image:$VERSION"
+            for attempt in $(seq 1 60); do
+              if docker manifest inspect "$reference" > /dev/null 2>&1; then
+                echo "found $reference"
+                continue 2
+              fi
+              echo "waiting for $reference ($attempt/60)"
+              sleep 30
+            done
+            echo "::error::$reference is not in the registry after 30 minutes."
+            exit 1
+          done
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          if [ -z "$SSH_KEY" ] || [ -z "$KNOWN_HOSTS" ]; then
+            echo "::error::The DEPLOY_SSH_KEY and DEPLOY_KNOWN_HOSTS secrets are required."
+            exit 1
+          fi
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/deploy_key ~/.ssh/known_hosts
+
+      - name: Copy the compose file
+        run: |
+          scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=yes \
+            docker-compose.yml "$DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH/docker-compose.yml"
+
+      - name: Pull and start the stack
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=yes "$DEPLOY_USER@$DEPLOY_HOST" \
+            "set -e; cd '$DEPLOY_PATH'; test -f .env;
+             export KALASH_IMAGE_PREFIX='$REGISTRY/kalash' KALASH_IMAGE_TAG='$VERSION';
+             docker compose pull gateway goal-service transaction-service;
+             docker compose up -d --no-build --wait --wait-timeout 300;
+             docker compose ps"
+          echo "Deployed $VERSION to $DEPLOY_HOST" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Remove credentials
+        if: always()
+        run: |
+          rm -f ~/.ssh/deploy_key
+          docker logout "${REGISTRY%%/*}" || true

@@ -1,0 +1,80 @@
+# Transaction Service with its own PostgreSQL database (plan Section 5.6).
+#
+#   cp .env.example .env          # then set TXN_DB_PASSWORD
+#   docker compose up -d --build --wait
+#   docker compose down
+#
+# The Goal Service is not part of this project. By default the container
+# calls it on the Docker host (for example the Goal Service project stack,
+# which publishes port 8080). Override with CONTAINER_GOAL_SERVICE_BASE_URL;
+# GOAL_SERVICE_BASE_URL in .env is for host runs and points at localhost,
+# which inside a container would be the container itself. Without a
+# reachable Goal Service, history and readiness work; writes return 503
+# TXN-002.
+#
+# Only TXN_DB_NAME, TXN_DB_USER, TXN_DB_PASSWORD, APP_TIMEZONE, LOG_LEVEL and
+# GOAL_SERVICE_TIMEOUT_SECONDS are read from .env. Do not run alongside the
+# root stack: both publish ports 8000 and 5433.
+
+name: kalash-transaction
+
+services:
+  transaction-service:
+    build:
+      context: .
+      args:
+        VERSION: "0.1.0"
+        GIT_SHA: ${GIT_SHA:-unknown}
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+    image: kalash/transaction-service:0.1.0
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: docker
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Kolkata}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      TXN_DB_HOST: transaction-db
+      TXN_DB_PORT: "5432"
+      TXN_DB_NAME: ${TXN_DB_NAME:-transaction_db}
+      TXN_DB_USER: ${TXN_DB_USER:-txn_user}
+      TXN_DB_PASSWORD: ${TXN_DB_PASSWORD:?Set TXN_DB_PASSWORD in .env}
+      GOAL_SERVICE_BASE_URL: ${CONTAINER_GOAL_SERVICE_BASE_URL:-http://host.docker.internal:8080}
+      GOAL_SERVICE_TIMEOUT_SECONDS: ${GOAL_SERVICE_TIMEOUT_SECONDS:-3}
+      # Empty: documentation at :8000/docs. Set /docs/transactions when the
+      # gateway project stack fronts this service.
+      APP_ROOT_PATH: ${CONTAINER_APP_ROOT_PATH:-}
+    # Docker Desktop provides host.docker.internal; on Linux this maps it.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      transaction-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "healthcheck", "/ready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+    stop_grace_period: 5s
+    restart: unless-stopped
+
+  transaction-db:
+    image: postgres:18.6
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${TXN_DB_NAME:-transaction_db}
+      POSTGRES_USER: ${TXN_DB_USER:-txn_user}
+      POSTGRES_PASSWORD: ${TXN_DB_PASSWORD:?Set TXN_DB_PASSWORD in .env}
+    volumes:
+      - transaction-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  transaction-data:

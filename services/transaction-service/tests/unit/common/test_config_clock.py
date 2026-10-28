@@ -38,6 +38,14 @@ def test_password_is_required(monkeypatch):
         Settings(_env_file=None)
 
 
+def test_validated_factory_loads_environment_and_rejects_blank_password(monkeypatch):
+    monkeypatch.setenv("TXN_DB_PASSWORD", "unit-test-only")
+    assert Settings.model_validate({}).txn_db_password.get_secret_value() == "unit-test-only"
+    monkeypatch.setenv("TXN_DB_PASSWORD", "")
+    with pytest.raises(ValidationError):
+        Settings.model_validate({})
+
+
 def test_environment_overrides_dotenv(tmp_path, monkeypatch):
     dotenv = tmp_path / ".env"
     dotenv.write_text("TXN_DB_PASSWORD=unit-test-only\nTXN_DB_PORT=5433\nUNRELATED=ignored\n")

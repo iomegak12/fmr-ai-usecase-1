@@ -1,0 +1,121 @@
+# Goal Service pipeline (plan Section 5.9): Java 25, Spotless check, unit
+# tests with the JaCoCo 80% gate, coverage report, image build and push.
+#
+# Pull requests always start this workflow so its checks can be required.
+# The changes job skips the work, reported as passed, when a pull request does
+# not touch this project. Tag pushes ignore path filters, so a vX.Y.Z tag
+# builds every project.
+
+name: goal-service
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*.*.*"]
+    paths:
+      - services/goal-service/**
+      - scripts/**
+      - .github/workflows/goal-service.yml
+      - .github/workflows/image.yml
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changes:
+    name: goal-service changes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Did this project change?
+        id: diff
+        run: |
+          set -euo pipefail
+          changed=true
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] &&
+            ! git diff --name-only HEAD^1 HEAD |
+              grep -qE '^(services/goal-service/|scripts/|\.github/workflows/(goal-service|image)\.yml$)'; then
+            changed=false
+            echo "::notice::No Goal Service changes in this pull request; checks skipped."
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+  verify:
+    name: goal-service verify
+    needs: changes
+    if: needs.changes.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GOAL_RUNNER: host
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+          cache-dependency-path: services/goal-service/pom.xml
+
+      - name: No native SQL in application code (D-08)
+        run: |
+          if grep -rnE 'nativeQuery|createNativeQuery|JdbcTemplate|NamedParameterJdbcTemplate|java\.sql\.(Statement|PreparedStatement)|prepareStatement' \
+            services/goal-service/src/main/java; then
+            echo "::error::Use Spring Data JPA repositories, derived queries or JPQL; SQL belongs only in Flyway migrations."
+            exit 1
+          fi
+
+      - name: Spotless check
+        run: make -C services/goal-service lint
+
+      - name: Unit tests and the JaCoCo gate
+        run: make -C services/goal-service coverage
+
+      - name: Upload coverage and test reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: goal-service-coverage
+          path: |
+            services/goal-service/target/site/jacoco/
+            services/goal-service/target/surefire-reports/
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Project version
+        id: version
+        run: |
+          python3 - <<'EOF' >> "$GITHUB_OUTPUT"
+          import xml.etree.ElementTree as ElementTree
+          root = ElementTree.parse("services/goal-service/pom.xml").getroot()
+          print("version=" + root.find("{http://maven.apache.org/POM/4.0.0}version").text.strip())
+          EOF
+
+  image:
+    name: goal-service image
+    needs: verify
+    uses: ./.github/workflows/image.yml
+    with:
+      image: goal-service
+      context: services/goal-service
+      version-arg: VERSION
+      project-version: ${{ needs.verify.outputs.version }}
+    secrets: inherit

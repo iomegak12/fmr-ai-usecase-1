@@ -11,7 +11,7 @@ from app.main import create_app
 
 def main() -> None:
     """Use a selector loop on Windows for psycopg async connections."""
-    settings = Settings()
+    settings = Settings.model_validate({})
     config = uvicorn.Config(
         create_app(settings),
         host="0.0.0.0" if settings.app_env == "docker" else "127.0.0.1",

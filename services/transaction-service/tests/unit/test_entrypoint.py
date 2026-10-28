@@ -7,7 +7,7 @@ def test_entrypoint_uses_immediate_shutdown_and_no_proxy_trust(settings, monkeyp
     config = MagicMock()
     server = MagicMock()
     server.serve = AsyncMock()
-    monkeypatch.setattr(entrypoint, "Settings", lambda: settings)
+    monkeypatch.setattr(entrypoint.Settings, "model_validate", lambda values: settings)
     monkeypatch.setattr(entrypoint, "create_app", lambda config: object())
     monkeypatch.setattr(entrypoint.uvicorn, "Config", config)
     monkeypatch.setattr(entrypoint.uvicorn, "Server", lambda config: server)

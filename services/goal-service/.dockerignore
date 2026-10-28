@@ -1,0 +1,21 @@
+# Build context for services/goal-service/Dockerfile: only the Maven Wrapper,
+# pom.xml, src/main and docker/ are used.
+target/
+src/test/
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/
+*.log
+*.swp
+*~
+.DS_Store
+Thumbs.db
+README.md

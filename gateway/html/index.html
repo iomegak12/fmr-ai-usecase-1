@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalash API Gateway</title>
+  <style>
+    :root {
+      --bg: #faf7f2; --fg: #2b2620; --muted: #6b6258; --card: #ffffff;
+      --line: #e6dfd4; --accent: #a25a12; --code: #f3eee6;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1b1814; --fg: #efe9e1; --muted: #a89d90; --card: #24201b;
+        --line: #3a342c; --accent: #e3a35c; --code: #2e2924;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 40px 16px 56px; }
+    h1 { margin: 0 0 4px; font-size: 1.75rem; }
+    .lede { margin: 0 0 28px; color: var(--muted); }
+    section {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 10px; padding: 18px 20px; margin-bottom: 16px;
+    }
+    h2 { margin: 0 0 10px; font-size: 1.05rem; }
+    table { width: 100%; border-collapse: collapse; }
+    td { padding: 6px 0; vertical-align: top; border-top: 1px solid var(--line); }
+    tr:first-child td { border-top: 0; }
+    td:first-child { width: 46%; padding-right: 12px; }
+    code { background: var(--code); padding: 1px 6px; border-radius: 4px; font-size: .9em; }
+    a { color: var(--accent); }
+    p.note { margin: 10px 0 0; color: var(--muted); font-size: .92rem; }
+    footer { color: var(--muted); font-size: .85rem; margin-top: 24px; }
+    @media (max-width: 520px) { td { display: block; width: 100% !important; padding: 2px 0; }
+      td:first-child { padding-top: 8px; } tr td + td { border-top: 0; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Kalash API Gateway</h1>
+    <p class="lede">Savings Goal Planner, Release 1. Single public origin for the back-end services.</p>
+
+    <section>
+      <h2>APIs</h2>
+      <table>
+        <tr><td><code>/api/v1/goals</code></td><td>Goal Service: goals, progress and insights</td></tr>
+        <tr><td><code>/api/v1/transactions</code></td><td>Transaction Service: deposits, withdrawals and history</td></tr>
+      </table>
+      <p class="note">Rate limited per client IP. Responses carry <code>X-RateLimit-Limit</code>,
+        <code>X-RateLimit-Remaining</code> and <code>X-RateLimit-Reset</code>; over the limit you get
+        HTTP 429 (<code>COMMON-429</code>) with <code>Retry-After</code>.</p>
+    </section>
+
+    <section>
+      <h2>Documentation</h2>
+      <table>
+        <tr><td><a href="/docs/goals/">/docs/goals/</a></td><td>Goal Service Swagger UI and OpenAPI</td></tr>
+        <tr><td><a href="/docs/transactions/">/docs/transactions/</a></td><td>Transaction Service Swagger UI and OpenAPI</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Health</h2>
+      <table>
+        <tr><td><a href="/health">/health</a> · <a href="/ready">/ready</a></td><td>Gateway liveness and readiness</td></tr>
+        <tr><td><a href="/health/goals">/health/goals</a> · <a href="/ready/goals">/ready/goals</a></td><td>Goal Service</td></tr>
+        <tr><td><a href="/health/transactions">/health/transactions</a> · <a href="/ready/transactions">/ready/transactions</a></td><td>Transaction Service</td></tr>
+      </table>
+    </section>
+
+    <footer>Gateway version @GATEWAY_VERSION@ · Local demonstration with no back-end authentication.</footer>
+  </main>
+</body>
+</html>

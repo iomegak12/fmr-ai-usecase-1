@@ -43,6 +43,8 @@ class JsonFormatter(logging.Formatter):
             "durationMs",
             "status",
             "exceptionType",
+            "delta",
+            "remoteOutcome",
         ):
             if hasattr(record, key):
                 event[key] = getattr(record, key)
@@ -54,10 +56,10 @@ class ConsoleFormatter(logging.Formatter):
 
     def formatException(
         self,
-        exc_info: tuple[type[BaseException] | None, BaseException | None, TracebackType | None],
+        ei: tuple[type[BaseException] | None, BaseException | None, TracebackType | None],
     ) -> str:
         """Report exception identity without serializing sensitive exception details."""
-        exception_type = exc_info[0]
+        exception_type = ei[0]
         return f"exceptionType={exception_type.__name__}" if exception_type else ""
 
 

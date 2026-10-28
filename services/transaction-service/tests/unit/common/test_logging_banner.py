@@ -17,6 +17,8 @@ def test_json_logging_fields_and_no_exception_contents():
     record.durationMs = 12.3
     record.status = 503
     record.exceptionType = "OperationalError"
+    record.delta = -20
+    record.remoteOutcome = "confirmed"
     token = correlation_id.set("log-123")
     try:
         CorrelationFilter().filter(record)
@@ -28,6 +30,8 @@ def test_json_logging_fields_and_no_exception_contents():
     assert value["level"] == "WARN"
     assert value["durationMs"] == 12.3
     assert value["exceptionType"] == "OperationalError"
+    assert value["delta"] == -20
+    assert value["remoteOutcome"] == "confirmed"
     assert value["timestamp"].endswith("+00:00")
 
 

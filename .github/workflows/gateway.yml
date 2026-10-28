@@ -1,0 +1,105 @@
+# API Gateway pipeline (plan Section 5.9): luacheck, busted with the luacov
+# report, image build, nginx -t configuration test in the built image, and
+# push.
+#
+# Pull requests always start this workflow so its checks can be required.
+# The changes job skips the work, reported as passed, when a pull request does
+# not touch this project. Tag pushes ignore path filters, so a vX.Y.Z tag
+# builds every project.
+
+name: gateway
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*.*.*"]
+    paths:
+      - gateway/**
+      - scripts/**
+      - .github/workflows/gateway.yml
+      - .github/workflows/image.yml
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  changes:
+    name: gateway changes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.diff.outputs.changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: github.event_name == 'pull_request'
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - name: Did this project change?
+        id: diff
+        run: |
+          set -euo pipefail
+          changed=true
+          if [ "$GITHUB_EVENT_NAME" = pull_request ] &&
+            ! git diff --name-only HEAD^1 HEAD |
+              grep -qE '^(gateway/|scripts/|\.github/workflows/(gateway|image)\.yml$)'; then
+            changed=false
+            echo "::notice::No gateway changes in this pull request; checks skipped."
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
+  verify:
+    name: gateway verify
+    needs: changes
+    if: needs.changes.outputs.changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: luacheck
+        run: make -C gateway lint
+
+      - name: busted with the luacov report
+        run: make -C gateway coverage
+
+      - name: Upload the coverage report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: gateway-coverage
+          path: gateway/luacov.report.out
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Project version
+        id: version
+        run: |
+          set -euo pipefail
+          version=$(sed -n 's/^ARG GATEWAY_VERSION=//p' gateway/Dockerfile)
+          [ -n "$version" ] || { echo "::error::ARG GATEWAY_VERSION not found in gateway/Dockerfile."; exit 1; }
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+  image:
+    name: gateway image
+    needs: verify
+    uses: ./.github/workflows/image.yml
+    with:
+      image: gateway
+      context: gateway
+      version-arg: GATEWAY_VERSION
+      project-version: ${{ needs.verify.outputs.version }}
+      # The entrypoint validates the settings and renders the configuration;
+      # this then runs nginx -t against it.
+      smoke-command: /usr/local/openresty/bin/openresty -t
+    secrets: inherit

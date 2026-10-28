@@ -1,0 +1,67 @@
+# Goal Service with its own PostgreSQL database (plan Section 5.6).
+#
+#   cp .env.example .env          # then set GOAL_DB_PASSWORD
+#   docker compose up -d --build --wait
+#   docker compose down
+#
+# Only GOAL_DB_NAME, GOAL_DB_USER, GOAL_DB_PASSWORD, APP_TIMEZONE and LOG_LEVEL
+# are read from .env; the host-run values there (localhost, local profile)
+# do not apply inside containers. Data lives in this project's own volume,
+# separate from the full stack. Do not run alongside the root stack: both
+# publish ports 8080 and 5432.
+
+name: kalash-goal
+
+services:
+  goal-service:
+    build:
+      context: .
+      args:
+        VERSION: "0.1.0-SNAPSHOT"
+        GIT_SHA: ${GIT_SHA:-unknown}
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+    image: kalash/goal-service:0.1.0
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Kolkata}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      GOAL_DB_HOST: goal-db
+      GOAL_DB_PORT: "5432"
+      GOAL_DB_NAME: ${GOAL_DB_NAME:-goal_db}
+      GOAL_DB_USER: ${GOAL_DB_USER:-goal_user}
+      GOAL_DB_PASSWORD: ${GOAL_DB_PASSWORD:?Set GOAL_DB_PASSWORD in .env}
+    depends_on:
+      goal-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "healthcheck", "/ready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 90s
+    mem_limit: 1g
+    stop_grace_period: 5s
+    restart: unless-stopped
+
+  goal-db:
+    image: postgres:18.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${GOAL_DB_NAME:-goal_db}
+      POSTGRES_USER: ${GOAL_DB_USER:-goal_user}
+      POSTGRES_PASSWORD: ${GOAL_DB_PASSWORD:?Set GOAL_DB_PASSWORD in .env}
+    volumes:
+      - goal-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  goal-data:

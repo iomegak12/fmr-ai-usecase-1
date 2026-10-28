@@ -44,7 +44,7 @@ def test_direct_docs_openapi_metrics_and_no_cors(client):
     assert schema["servers"][0]["url"] == "/"
     assert {"/health", "/ready"} <= schema["paths"].keys()
     assert "503" in schema["paths"]["/ready"]["get"]["responses"]
-    assert "/api/v1/transactions" not in schema["paths"]
+    assert "/api/v1/transactions" in schema["paths"]
     assert "/openapi.json" in client.get("/docs").text
     assert "http_requests_total" in client.get("/metrics").text
 

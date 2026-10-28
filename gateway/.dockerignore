@@ -1,0 +1,18 @@
+# Build context for gateway/Dockerfile. spec/ and the Lua tool settings stay
+# in the context because the "test" stage needs them; the runtime stage
+# copies only conf/, lua/, html/ and the entrypoint.
+.env
+.env.*
+!.env.example
+conf/generated/
+luacov.stats.out
+luacov.report.out
+*.log
+.git
+.gitignore
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db

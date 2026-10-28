@@ -1,0 +1,155 @@
+# Reusable image job for the three project pipelines (plan Section 5.9).
+#
+# Builds a project's runtime image, checks that it runs as the non-root user,
+# runs an optional smoke command, and pushes it on main and release tags.
+# Tags: the 7-character git SHA always, plus <semver> for a vX.Y.Z tag, which
+# must equal the project's own version. Pushing needs the repository variable
+# KALASH_REGISTRY (for example ghcr.io/<owner>) and the secrets
+# REGISTRY_USERNAME and REGISTRY_PASSWORD. Until the registry is chosen
+# (plan Open Issue 2), images are built and checked but not pushed.
+
+name: image
+
+on:
+  workflow_call:
+    inputs:
+      image:
+        description: Image name under kalash/, for example goal-service
+        required: true
+        type: string
+      context:
+        description: Docker build context (the project directory)
+        required: true
+        type: string
+      version-arg:
+        description: Dockerfile build argument that carries the version
+        required: true
+        type: string
+      project-version:
+        description: The project's own version (pom.xml, pyproject.toml or Dockerfile)
+        required: true
+        type: string
+      smoke-command:
+        description: Optional command run in the built image, space-separated
+        required: false
+        type: string
+        default: ""
+    secrets:
+      REGISTRY_USERNAME:
+        required: false
+      REGISTRY_PASSWORD:
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  image:
+    name: build and push
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      REGISTRY: ${{ vars.KALASH_REGISTRY }}
+      IMAGE: ${{ inputs.image }}
+      CONTEXT: ${{ inputs.context }}
+      VERSION_ARG: ${{ inputs.version-arg }}
+      PROJECT_VERSION: ${{ inputs.project-version }}
+      SMOKE_COMMAND: ${{ inputs.smoke-command }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Choose tags and push policy
+        id: plan
+        run: |
+          set -euo pipefail
+          [ -n "$PROJECT_VERSION" ] || { echo "::error::The project version is empty."; exit 1; }
+          sha=$(git rev-parse --short=7 HEAD)
+          repository="${REGISTRY:+$REGISTRY/}kalash/$IMAGE"
+          if [[ $GITHUB_REF == refs/tags/v* ]]; then
+            release=${GITHUB_REF_NAME#v}
+            if [ "$release" != "$PROJECT_VERSION" ]; then
+              echo "::error::Tag $GITHUB_REF_NAME does not match $IMAGE version $PROJECT_VERSION. Set the version to $release before tagging."
+              exit 1
+            fi
+            tags="$release $sha"
+          else
+            tags=$sha
+          fi
+          push=false
+          if [ "$GITHUB_EVENT_NAME" = push ] && { [ "$GITHUB_REF" = refs/heads/main ] || [[ $GITHUB_REF == refs/tags/v* ]]; }; then
+            if [ -n "$REGISTRY" ]; then
+              push=true
+            else
+              echo "::notice::Push skipped for $IMAGE: repository variable KALASH_REGISTRY is not set (plan Open Issue 2)."
+            fi
+          fi
+          {
+            echo "repository=$repository"
+            echo "tags=$tags"
+            echo "sha=$sha"
+            echo "created=$(git log -1 --format=%cI)"
+            echo "push=$push"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        env:
+          REPOSITORY: ${{ steps.plan.outputs.repository }}
+          TAGS: ${{ steps.plan.outputs.tags }}
+          SHA: ${{ steps.plan.outputs.sha }}
+          CREATED: ${{ steps.plan.outputs.created }}
+        run: |
+          set -euo pipefail
+          tag_args=()
+          for tag in $TAGS; do tag_args+=(--tag "$REPOSITORY:$tag"); done
+          docker build "${tag_args[@]}" \
+            --build-arg "$VERSION_ARG=$PROJECT_VERSION" \
+            --build-arg "GIT_SHA=$SHA" \
+            --build-arg "BUILD_DATE=$CREATED" \
+            "$CONTEXT"
+
+      - name: Check the image runs as the non-root user
+        env:
+          IMAGE_REF: ${{ steps.plan.outputs.repository }}:${{ steps.plan.outputs.sha }}
+        run: |
+          set -euo pipefail
+          uid=$(docker run --rm --entrypoint id "$IMAGE_REF" -u)
+          [ "$uid" = 10001 ] || { echo "::error::$IMAGE runs as uid $uid, not 10001 (kalash)."; exit 1; }
+          docker image inspect "$IMAGE_REF" --format '{{json .Config.Labels}}'
+
+      - name: Smoke test
+        if: inputs.smoke-command != ''
+        env:
+          IMAGE_REF: ${{ steps.plan.outputs.repository }}:${{ steps.plan.outputs.sha }}
+        run: |
+          set -euo pipefail
+          read -r -a command <<< "$SMOKE_COMMAND"
+          docker run --rm "$IMAGE_REF" "${command[@]}"
+
+      - name: Log in to the registry
+        if: steps.plan.outputs.push == 'true'
+        env:
+          USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+          PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
+            echo "::error::KALASH_REGISTRY is set, so the REGISTRY_USERNAME and REGISTRY_PASSWORD secrets are required."
+            exit 1
+          fi
+          printf '%s' "$PASSWORD" | docker login "${REGISTRY%%/*}" --username "$USERNAME" --password-stdin
+
+      - name: Push
+        if: steps.plan.outputs.push == 'true'
+        env:
+          REPOSITORY: ${{ steps.plan.outputs.repository }}
+          TAGS: ${{ steps.plan.outputs.tags }}
+        run: |
+          set -euo pipefail
+          for tag in $TAGS; do docker push "$REPOSITORY:$tag"; done
+          echo "Pushed $REPOSITORY: $TAGS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Log out of the registry
+        if: always() && steps.plan.outputs.push == 'true'
+        run: docker logout "${REGISTRY%%/*}"

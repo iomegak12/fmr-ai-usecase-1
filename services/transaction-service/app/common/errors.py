@@ -5,9 +5,12 @@ from enum import Enum
 from http import HTTPStatus
 from typing import TypedDict
 
+import httpx
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm.exc import StaleDataError
 from starlette.exceptions import HTTPException
 
 from app.common.clock import Clock
@@ -83,6 +86,18 @@ class ValidationError(ApiError):
         super().__init__(ErrorCode.COMMON_400, errors=errors)
 
 
+class GoalProblem(Exception):
+    """Carry the upstream 4xx body without altering the Goal Service's Problem Details."""
+
+    def __init__(self, response: httpx.Response) -> None:
+        """Preserve bytes/status and relevant response headers, never cookies or hop-by-hop data."""
+        super().__init__("Goal Service rejected the operation")
+        self.status = response.status_code
+        self.body = response.content
+        self.content_type = response.headers.get("content-type", "application/problem+json")
+        self.retry_after = response.headers.get("retry-after")
+
+
 def problem_response(request: Request, error: ApiError, clock: Clock) -> JSONResponse:
     """Serialize the agreed envelope, echoing correlation even on unhandled errors."""
     request_id = getattr(request.state, "correlation_id", "")
@@ -108,6 +123,24 @@ def problem_response(request: Request, error: ApiError, clock: Clock) -> JSONRes
 
 def register_error_handlers(app: FastAPI, clock: Clock) -> None:
     """Register explicit logged boundaries without returning internal exception text."""
+
+    @app.exception_handler(GoalProblem)
+    async def goal_problem(request: Request, exc: GoalProblem) -> Response:
+        logger.warning("goal_problem_forwarded", extra={"status": exc.status})
+        headers = {"Content-Type": exc.content_type}
+        if exc.retry_after is not None:
+            headers["Retry-After"] = exc.retry_after
+        return Response(content=exc.body, status_code=exc.status, headers=headers)
+
+    @app.exception_handler(StaleDataError)
+    async def stale_data(request: Request, exc: StaleDataError) -> JSONResponse:
+        logger.warning("transaction_version_conflict")
+        return problem_response(request, ApiError(ErrorCode.COMMON_409), clock)
+
+    @app.exception_handler(SQLAlchemyError)
+    async def database_error(request: Request, exc: SQLAlchemyError) -> JSONResponse:
+        logger.error("transaction_database_error", extra={"exceptionType": type(exc).__name__})
+        return problem_response(request, ApiError(ErrorCode.COMMON_500), clock)
 
     @app.exception_handler(ApiError)
     async def api_error(request: Request, exc: ApiError) -> JSONResponse:

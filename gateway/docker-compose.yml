@@ -1,0 +1,75 @@
+# API Gateway with its Redis rate-limit store (plan Section 5.6).
+#
+#   cp .env.example .env          # optional; every value has a default
+#   docker compose up -d --build --wait
+#   docker compose down
+#
+# The services are not part of this project. By default the gateway forwards
+# to services published on the Docker host (for example the Goal and
+# Transaction project stacks on ports 8080 and 8000); set
+# GOAL_SERVICE_UPSTREAM and TXN_SERVICE_UPSTREAM to change that. Until an
+# upstream answers, its routes return 502. For /docs/transactions/ to work,
+# the Transaction Service must run with APP_ROOT_PATH=/docs/transactions.
+#
+# Linux: nginx resolves upstream names through DNS only, and the
+# host.docker.internal mapping below is in /etc/hosts. Set the upstreams to
+# the host's bridge address (for example 172.17.0.1:8080) there.
+# Do not run alongside the root stack: both publish port 80.
+
+name: kalash-gateway
+
+services:
+  gateway:
+    build:
+      context: .
+      args:
+        GATEWAY_VERSION: "0.1.0"
+        GIT_SHA: ${GIT_SHA:-unknown}
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+    image: kalash/gateway:0.1.0
+    ports:
+      - "80:80"
+    environment:
+      GOAL_SERVICE_UPSTREAM: ${GOAL_SERVICE_UPSTREAM:-host.docker.internal:8080}
+      TXN_SERVICE_UPSTREAM: ${TXN_SERVICE_UPSTREAM:-host.docker.internal:8000}
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      REDIS_TIMEOUT_MS: ${REDIS_TIMEOUT_MS:-100}
+      RATE_LIMIT_REQUESTS: ${RATE_LIMIT_REQUESTS:-100}
+      RATE_LIMIT_WINDOW_SECONDS: ${RATE_LIMIT_WINDOW_SECONDS:-60}
+      RATE_LIMIT_WARMUP_SECONDS: ${RATE_LIMIT_WARMUP_SECONDS:-30}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
+      GATEWAY_RESOLVER: ${GATEWAY_RESOLVER:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    stop_grace_period: 8s
+    restart: unless-stopped
+
+  redis:
+    image: redis:8.8.4-alpine
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --maxmemory
+      - 64mb
+      - --maxmemory-policy
+      - volatile-ttl
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    stop_grace_period: 5s
+    restart: unless-stopped

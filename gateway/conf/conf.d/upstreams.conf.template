@@ -1,0 +1,19 @@
+# Upstream services (LLD §5.1, §18). docker-entrypoint.sh renders this file
+# to generated/upstreams.conf, replacing the @...@ placeholders with
+# GOAL_SERVICE_UPSTREAM and TXN_SERVICE_UPSTREAM (host:port).
+#
+# "resolve" re-resolves the host name through the resolver while running, so
+# the gateway starts before the services exist and follows container
+# restarts. Until a name resolves, requests to it get a 502 Problem Details.
+
+upstream goal_service {
+    zone goal_service 64k;
+    server @GOAL_SERVICE_UPSTREAM@ resolve;
+    keepalive 16;
+}
+
+upstream transaction_service {
+    zone transaction_service 64k;
+    server @TXN_SERVICE_UPSTREAM@ resolve;
+    keepalive 16;
+}

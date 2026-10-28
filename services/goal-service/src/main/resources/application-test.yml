@@ -1,4 +1,6 @@
 spring:
+  flyway:
+    enabled: false
   main:
     banner-mode: off
   autoconfigure:

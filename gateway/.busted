@@ -1,0 +1,13 @@
+-- busted settings: run from the gateway directory (see README "Tests").
+return {
+  _all = {
+    lpath = "lua/?.lua;spec/?.lua",
+    cpath = "/usr/local/openresty/lualib/?.so",
+  },
+  default = {
+    ROOT = { "spec" },
+    pattern = "_spec",
+    coverage = true,
+    verbose = true,
+  },
+}

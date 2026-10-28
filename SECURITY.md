@@ -8,7 +8,7 @@
 | `1.0.0` | Planned, not released or supported as a published release yet |
 | Other versions | Unsupported |
 
-There is no production-supported release at Phase 1. Update this table when
+There is no production-supported release yet. Update this table when
 version 1.0.0 is actually released.
 
 ## Reporting a vulnerability
@@ -29,8 +29,17 @@ SLA is currently offered.
 ## Release 1 limitations
 
 Release 1 is designed for a **local demonstration**, not production or public
-internet exposure. Phase 1 services expose health, documentation and metrics;
-business APIs are not implemented yet.
+internet exposure. The services expose public Goal and Transaction APIs and internal
+balance/deletion operations as well as health, documentation and metrics on
+their direct ports. The gateway exposes the public APIs, documentation and
+health only. None of these endpoints has authentication, and none may be
+exposed to the public internet.
+
+The Compose stack publishes the service and database ports (8080, 8000, 5432,
+5433) on the host for local development only. Redis is not published. All
+application containers run as a non-root user, and each receives only its
+own database password. Base images are pinned, but they are not scanned or
+signed in Release 1.
 
 - The planned demo login is a frontend convenience, not a security boundary.
   The frontend and authentication/profile services are outside this backend
@@ -39,18 +48,40 @@ business APIs are not implemented yet.
   reach the APIs could read or modify demonstration data.
 - Swagger/OpenAPI and direct service ports are intended for local development.
   Production documentation access policy and hosting are unresolved.
-- Internal routes are planned to be blocked by the gateway, but direct
-  service access is not protected by that boundary.
+- The gateway answers `/internal/*` and metrics paths with 404, and its
+  documentation routes forward only documentation paths. Direct service ports
+  are not protected by that boundary; keep them off untrusted networks.
 - CORS is intentionally disabled; this is not a replacement for authentication.
-- Planned gateway rate limiting bypasses limiting and counting for 30 seconds
-  after startup and fails open on Redis errors. It is not a security perimeter.
+- Gateway rate limiting bypasses limiting and counting for 30 seconds after
+  every start and fails open on Redis errors. It is a fairness control, not a
+  security perimeter. Only list proxies you control in `TRUSTED_PROXIES`.
 - Immediate shutdown and cross-service commits can leave database balances
-  inconsistent; automatic reconciliation is not part of Release 1.
+  inconsistent; even a timed-out request may have committed remotely.
+  Mismatch events support manual triage, not automatic reconciliation.
 
 Use synthetic data only. Keep service and database access restricted to the
 local development environment. Do not deploy publicly until authentication,
 authorization, transport security, exposure policy and operational recovery
 have been designed and reviewed.
+
+## CI/CD and supply chain
+
+- **Least privilege.** Workflows run with `contents: read` only. Checkouts do
+  not keep the token (`persist-credentials: false`).
+- **Pinned actions.** Third-party actions are pinned to full commit SHAs,
+  with the version in a comment. Update them deliberately, reviewing each
+  change.
+- **Where secrets are used.** Registry credentials (`REGISTRY_USERNAME`,
+  `REGISTRY_PASSWORD`) are used only to push from `main` or a release tag.
+  Deployment secrets (`DEPLOY_SSH_KEY`, `DEPLOY_KNOWN_HOSTS`) are used only
+  in `deploy.yml`, behind the `production` environment. Add required
+  reviewers to that environment so every deployment is approved. Pull
+  requests never receive them.
+- **Deployment.** It verifies the host key against `DEPLOY_KNOWN_HOSTS` and
+  validates every value used in its remote command. The SSH key is removed
+  when the job ends.
+- **Images.** Images are built from pinned base images and checked to run as
+  uid 10001. They are not scanned or signed in Release 1.
 
 ## Secrets and local configuration
 

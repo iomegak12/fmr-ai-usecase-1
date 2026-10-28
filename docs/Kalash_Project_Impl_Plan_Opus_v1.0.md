@@ -225,18 +225,18 @@ P4 can run in parallel with P2 and P3.
 ### 5.1 P0 – Repository Foundation and Governance
 
 **Tasks**
-- [ ] Create the folder layout from Section 4, with empty `tests/integration` and `tests/e2e` folders that each have a README.
-- [ ] Add `.gitignore` covering Java (`target/`), Python (`.venv/`, `__pycache__/`, `.pytest_cache/`, `.ruff_cache/`, `htmlcov/`, `.coverage`), Lua, IDE files, OS files, `.env` and `*.dump`.
-- [ ] Add `.editorconfig` and `.gitattributes` (shell scripts use LF line endings).
-- [ ] Add `LICENSE`: MIT, "Copyright (c) 2026 Kalash Financial Services".
-- [ ] Add `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1, with a Kalash contact address).
-- [ ] Add `CONTRIBUTING.md`: branching, commit conventions, coding standards (LLD §8), documentation-comment rules (Section 7.8), test and coverage rules, PR checklist.
-- [ ] Add `SECURITY.md`: how to report issues, supported versions, Release 1 limitations (demo login, no back-end authentication).
-- [ ] Add `TROUBLESHOOTING.md` with initial entries (ports in use, Docker not running, `make` on Windows, migration failures, Redis down, 429 responses).
-- [ ] Add `CHANGELOG.md` with an `Unreleased` section and the planned `1.0.0` entry.
-- [ ] Add a skeleton root `README.md`, completed in P9.
-- [ ] Add a root `.env.example` with all full-stack variables (Section 6).
-- [ ] Add the PR template and issue templates.
+- [x] Create the folder layout from Section 4, with empty `tests/integration` and `tests/e2e` folders that each have a README.
+- [x] Add `.gitignore` covering Java (`target/`), Python (`.venv/`, `__pycache__/`, `.pytest_cache/`, `.ruff_cache/`, `htmlcov/`, `.coverage`), Lua, IDE files, OS files, `.env` and `*.dump`.
+- [x] Add `.editorconfig` and `.gitattributes` (shell scripts use LF line endings).
+- [x] Add `LICENSE`: MIT, "Copyright (c) 2026 Kalash Financial Services".
+- [x] Add `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1, with a Kalash contact address).
+- [x] Add `CONTRIBUTING.md`: branching, commit conventions, coding standards (LLD §8), documentation-comment rules (Section 7.8), test and coverage rules, PR checklist.
+- [x] Add `SECURITY.md`: how to report issues, supported versions, Release 1 limitations (demo login, no back-end authentication).
+- [x] Add `TROUBLESHOOTING.md` with initial entries (ports in use, Docker not running, `make` on Windows, migration failures, Redis down, 429 responses).
+- [x] Add `CHANGELOG.md` with an `Unreleased` section and the planned `1.0.0` entry.
+- [x] Add a skeleton root `README.md`, completed in P9.
+- [x] Add a root `.env.example` with all full-stack variables (Section 6).
+- [x] Add the PR template and issue templates.
 
 **Acceptance criteria**
 - The root contains no source code files.
@@ -288,63 +288,81 @@ P4 can run in parallel with P2 and P3.
 
 | Task | Details | Stories / Rules |
 |---|---|---|
-| [ ] Flyway `V1__create_goals.sql` | Table, CHECK constraints, `ux_goals_name_ci`, `ix_goals_target_date` (LLD §9.1) | BR-03, 04, 14, 25 |
-| [ ] `Goal` entity and `GoalStatus` enum | JPA mapping, `@Version`, UTC timestamps | – |
-| [ ] `GoalRepository` | Spring Data JPA: derived queries for the case-insensitive name check and the sorted, paginated overview. No hand-written SQL strings | BR-03, 25 |
-| [ ] Request and response DTOs | `CreateGoalRequest`, `UpdateGoalRequest` (at least one field), `GoalResponse`, `PageResponse`; float-to-integer coercion disabled | BR-02, 04 |
-| [ ] `GoalRules` | `ensureNameUnique`, `ensureFutureDate`, `ensureTargetAboveBalance`, `ensureEditAllowed` | BR-03, 05, 06, 17, 19 |
-| [ ] `GoalService` | create, get, list, update, cancel | KAL-BUC-00001, 00002, 00003, 00014 |
-| [ ] `StatusEvaluator` | Active ↔ Achieved transitions (LLD §15) | KAL-BUC-00015, 00016; BR-15, 16 |
-| [ ] `InsightsCalculator` | Pure function with an injected clock (LLD §16) | KAL-BUC-00010 to 00013; BR-21 to 24 |
-| [ ] `BalanceAdjustmentService` | Operation and status check, non-negative balance, then status evaluation. Retries up to 3 times on an optimistic-lock conflict, then returns `COMMON-409` | BR-10, 12, 13, 14 |
-| [ ] `GoalController` (public) | The 5 endpoints in LLD §13.1; `201` responses carry a `Location` header | – |
-| [ ] `BalanceAdjustmentController` (internal) | The 3 endpoints in LLD §14 under `/internal/v1/goals` | KAL-BUC-00004 to 00008 |
-| [ ] Documentation comments | Javadoc on every public class and method in `goal`, `balance` and `insights` | D-24 |
+| [x] Flyway `V1__create_goals.sql` | Table, CHECK constraints, `ux_goals_name_ci`, `ix_goals_target_date` (LLD §9.1) | BR-03, 04, 14, 25 |
+| [x] `Goal` entity and `GoalStatus` enum | JPA mapping, `@Version`, UTC timestamps | – |
+| [x] `GoalRepository` | Spring Data JPA: derived queries for the case-insensitive name check and the sorted, paginated overview. No hand-written SQL strings | BR-03, 25 |
+| [x] Request and response DTOs | `CreateGoalRequest`, `UpdateGoalRequest` (at least one field), `GoalResponse`, `PageResponse`; float-to-integer coercion disabled | BR-02, 04 |
+| [x] `GoalRules` | `ensureNameUnique`, `ensureFutureDate`, `ensureTargetAboveBalance`, `ensureEditAllowed` | BR-03, 05, 06, 17, 19 |
+| [x] `GoalService` | create, get, list, update, cancel | KAL-BUC-00001, 00002, 00003, 00014 |
+| [x] `StatusEvaluator` | Active ↔ Achieved transitions (LLD §15) | KAL-BUC-00015, 00016; BR-15, 16 |
+| [x] `InsightsCalculator` | Pure function with an injected clock (LLD §16) | KAL-BUC-00010 to 00013; BR-21 to 24 |
+| [x] `BalanceAdjustmentService` | Operation and status check, non-negative balance, then status evaluation. Retries up to 3 times on an optimistic-lock conflict, then returns `COMMON-409` | BR-10, 12, 13, 14 |
+| [x] `GoalController` (public) | The 5 endpoints in LLD §13.1; `201` responses carry a `Location` header | – |
+| [x] `BalanceAdjustmentController` (internal) | The 3 endpoints in LLD §14 under `/internal/v1/goals` | KAL-BUC-00004 to 00008 |
+| [x] Documentation comments | Javadoc on every public class and method in `goal`, `balance` and `insights` | D-24 |
 
 **Acceptance criteria**
 - Every endpoint matches the LLD contract and returns Problem Details with the catalogued codes.
 - All seven worked examples in LLD §16.4 pass as unit tests.
 - No runtime SQL strings exist (`@Query` with native SQL is not allowed).
 
+**P2 execution evidence**
+- Java 25 offline Docker build: `./mvnw -B -o spotless:apply verify` passed with 150 tests, including all seven worked examples, and 98.43% line coverage (565/574). Spotless and the 80% JaCoCo gate pass without coverage exclusions.
+- Real PostgreSQL 18 acceptance passed: Flyway V1 plus Hibernate validation; all five public and three internal operations; sorted paging; field validation and business errors; lifecycle transitions; exact timestamp preservation; OpenAPI examples; metrics, correlation and no CORS.
+- Concurrent deposits committed exactly once per successful response (21 successes, 3 bounded COMMON-409 conflicts out of 24 in the final run). A duplicate-name race produced one 201 and one GOAL-002. Committed data survived application restart; migration history remained valid. DB outage/recovery and shutdown cleanup passed.
+- Goal-owned `GoalMutations` shares the persistence/retry boundary without cross-feature repository imports. Three retries follow the initial attempt, each in a fresh transaction with a fresh read and rule validation.
+- PATCH omission means unchanged; explicit null is invalid. Numeric strings, decimals and arithmetic overflow are rejected. Timestamps use PostgreSQL microsecond precision. A UUID tie-breaker stabilizes pages when both specified ordering columns match.
+- P2 intentionally changes Goal startup: PostgreSQL must be reachable for migration and schema validation. No silent migration bypass, seed data, Transaction business code, or committed integration/e2e suite was added. Temporary acceptance containers and network were removed.
+
 ### 5.4 P3 – Transaction Service: Business Features
 
 | Task | Details | Stories / Rules |
 |---|---|---|
-| [ ] Alembic `0001_create_transactions` | `op` API only: table, CHECK constraints, `ix_transactions_goal_created` (LLD §9.2) | BR-07 |
-| [ ] `models.py` | SQLAlchemy 2 declarative model; `version_id_col` | – |
-| [ ] `repository.py` | ORM `select()`, `session.add()` and `session.delete()` only; paginated history, newest first | KAL-BUC-00009 |
-| [ ] `schemas.py` | Pydantic models with `StrictInt` and `gt=0`; `type` as an enum; page and size limits | BR-07 |
-| [ ] `GoalClient` | httpx client: 3-second timeout, no retries, forwards the correlation ID. Maps responses: 4xx passed through, timeout to `TXN-003`, connection failure or 5xx to `TXN-002` | LLD §14 |
-| [ ] `transactions/service.py` | Create (deposit or withdrawal), edit (delta calculation), delete (reverse delta). Each one: local change without commit → Goal Service call → commit, or roll back | KAL-BUC-00005 to 00008; BR-09, 10 to 14 |
-| [ ] Transaction date | Set from the IST clock and never updated | BR-09 |
-| [ ] Mismatch logging | If the Goal Service applied a change but the local commit failed, log at ERROR with correlation ID, goal ID and delta | LLD §23 |
-| [ ] `goal_deletion/service.py` | Read goal snapshot → confirm Cancelled → delete history and commit → call the internal delete; safe to repeat (LLD §17.3) | KAL-BUC-00004; BR-20 |
-| [ ] Routers | The 5 endpoints in LLD §13.2; routers only delegate to services | – |
-| [ ] Documentation comments | Google-style docstrings on every public module, class and function in `transactions`, `goal_deletion` and `clients` | D-24 |
+| [x] Alembic `0001_create_transactions` | `op` API only: table, CHECK constraints, `ix_transactions_goal_created` (LLD §9.2) | BR-07 |
+| [x] `models.py` | SQLAlchemy 2 declarative model; `version_id_col` | – |
+| [x] `repository.py` | ORM `select()`, `session.add()` and `session.delete()` only; paginated history, newest first | KAL-BUC-00009 |
+| [x] `schemas.py` | Pydantic models with `StrictInt` and `gt=0`; `type` as an enum; page and size limits | BR-07 |
+| [x] `GoalClient` | httpx client: 3-second timeout, no retries, forwards the correlation ID. Maps responses: 4xx passed through, timeout to `TXN-003`, connection failure or 5xx to `TXN-002` | LLD §14 |
+| [x] `transactions/service.py` | Create (deposit or withdrawal), edit (delta calculation), delete (reverse delta). Each one: local change without commit → Goal Service call → commit, or roll back | KAL-BUC-00005 to 00008; BR-09, 10 to 14 |
+| [x] Transaction date | Set from the IST clock and never updated | BR-09 |
+| [x] Mismatch logging | If the Goal Service applied a change but the local commit failed, log at ERROR with correlation ID, goal ID and delta | LLD §23 |
+| [x] `goal_deletion/service.py` | Read goal snapshot → confirm Cancelled → delete history and commit → call the internal delete; safe to repeat (LLD §17.3) | KAL-BUC-00004; BR-20 |
+| [x] Routers | The 5 endpoints in LLD §13.2; routers only delegate to services | – |
+| [x] Documentation comments | Google-style docstrings on every public module, class and function in `transactions`, `goal_deletion` and `clients` | D-24 |
 
 **Acceptance criteria**
 - Every failure path in LLD §14 and §23 rolls back the local change, and a unit test proves it.
 - Goal Service Problem Details are passed through unchanged.
 - No raw SQL (`text()`, `exec_driver_sql`) is used in application code.
 
+**P3 execution evidence**
+- `uv run --locked pytest`: 181 tests passed with 99.85% application line coverage; all rollback branches, operation deltas, immutable dates, version conflicts, unchanged upstream errors and commit mismatch paths are covered. Ruff lint/format checks pass; one pre-existing upstream Starlette/AnyIO deprecation warning remains.
+- `uv run --locked pyright --pythonpath .venv\Scripts\python.exe --pythonversion 3.14 app alembic`: 0 errors/warnings using the available local type checker. No new runtime dependencies were added.
+- Real PostgreSQL 18 checks passed for Alembic upgrade, repeat upgrade, empty-database downgrade/re-upgrade and metadata drift. No seed data or cross-database foreign keys are introduced.
+- Real Python-to-Java journeys passed for all five public operations, deltas, history order, immutable dates/timestamps, state-based rejections/rollback and Cancelled-goal cleanup. Twelve concurrent edits produced 3 commits and 9 explicit conflicts in the final run; persisted amount matched goal balance. Counts vary with scheduling.
+- A real Goal timeout rolled back the local insert while Transaction readiness/history remained available. History survived process restart; docs/metrics, no CORS, correlation and signal cleanup passed. Temporary helper processes, containers and network were removed.
+- Local ORM changes are flushed before the remote request so stale versions are rejected first. History cleanup is exposed by the transactions service rather than importing its repository into goal deletion.
+- The explicit LLD DELETE status contract wins over the contradictory prose mentioning delete response fields: deletes return 204 with no body. History omits goal snapshot fields. Unknown-goal history is empty; deletion after the goal is already gone returns unchanged GOAL-001.
+- Timeout caveat: local rollback cannot guarantee that a remote mutation did not commit. Confirmed remote acceptance followed by commit failure logs `remoteOutcome=confirmed`; potentially applied requests with missing/invalid responses log `remoteOutcome=unknown`. Both require operator triage, not blind retries or automatic reconciliation.
+
 ### 5.5 P4 – API Gateway and Rate Limiter
 
 **Tasks**
-- [ ] OpenResty base image, `nginx.conf` and `conf.d/` split into upstreams, routes, docs, logging and real_ip.
-- [ ] Routing per LLD §18: `/api/v1/goals` and `/api/v1/transactions` (10-second read timeout); `/internal/` returns 404; correlation ID mapped and added to every response.
-- [ ] Docs routes: `/docs/goals/` (Swagger UI and `/v3/api-docs`) and `/docs/transactions/` (`/docs` and `/openapi.json`), not rate limited.
-- [ ] Health routes: `/health` (gateway liveness), `/ready` (gateway can reach Redis; reported as degraded, not failed, because the limiter fails open), plus pass-through routes `/health/goals`, `/ready/goals`, `/health/transactions` and `/ready/transactions`.
-- [ ] Metrics endpoints are not routed (LLD §26).
-- [ ] Landing page `/` (static HTML): API base paths, docs links, health links and version.
-- [ ] `real_ip`: `set_real_ip_from` uses the trusted proxy list from the environment (empty by default); the rate-limit key is `$remote_addr`.
-- [ ] Warm-up: `init_worker_by_lua` records the gateway start time in a shared dictionary. For the first 30 seconds (`RATE_LIMIT_WARMUP_SECONDS`), requests skip the limiter and are not counted.
-- [ ] Limiter, in `access_by_lua` for `/api/v1/*` only: one atomic Redis script removes entries older than 60 seconds, counts the rest, then either adds the request (if the count is under 100) or rejects it. The script returns remaining capacity and reset time. The key has a 60-second expiry and each entry gets a unique member ID.
-- [ ] Rejection: HTTP 429 with Problem Details (`COMMON-429`, "Too many requests, please retry later") and the `Retry-After` and `X-RateLimit-*` headers. Allowed responses also carry the `X-RateLimit-*` headers.
-- [ ] Fail open: any Redis error or timeout (short connect and read timeouts, connection pooling) forwards the request and logs ERROR with `event=ratelimit_store_unavailable`.
-- [ ] JSON access log including `$correlation_id`, the client IP and the rate-limit outcome.
-- [ ] Limits come from environment variables: `RATE_LIMIT_REQUESTS=100`, `RATE_LIMIT_WINDOW_SECONDS=60`, `RATE_LIMIT_WARMUP_SECONDS=30`.
-- [ ] Gateway console start-up banner: listening port, upstreams, limiter settings, Redis target.
-- [ ] LuaDoc comments on all Lua modules.
+- [x] OpenResty base image, `nginx.conf` and `conf.d/` split into upstreams, routes, docs, logging and real_ip.
+- [x] Routing per LLD §18: `/api/v1/goals` and `/api/v1/transactions` (10-second read timeout); `/internal/` returns 404; correlation ID mapped and added to every response.
+- [x] Docs routes: `/docs/goals/` (Swagger UI and `/v3/api-docs`) and `/docs/transactions/` (`/docs` and `/openapi.json`), not rate limited.
+- [x] Health routes: `/health` (gateway liveness), `/ready` (gateway can reach Redis; reported as degraded, not failed, because the limiter fails open), plus pass-through routes `/health/goals`, `/ready/goals`, `/health/transactions` and `/ready/transactions`.
+- [x] Metrics endpoints are not routed (LLD §26).
+- [x] Landing page `/` (static HTML): API base paths, docs links, health links and version.
+- [x] `real_ip`: `set_real_ip_from` uses the trusted proxy list from the environment (empty by default); the rate-limit key is `$remote_addr`.
+- [x] Warm-up: `init_worker_by_lua` records the gateway start time in a shared dictionary. For the first 30 seconds (`RATE_LIMIT_WARMUP_SECONDS`), requests skip the limiter and are not counted.
+- [x] Limiter, in `access_by_lua` for `/api/v1/*` only: one atomic Redis script removes entries older than 60 seconds, counts the rest, then either adds the request (if the count is under 100) or rejects it. The script returns remaining capacity and reset time. The key has a 60-second expiry and each entry gets a unique member ID.
+- [x] Rejection: HTTP 429 with Problem Details (`COMMON-429`, "Too many requests, please retry later") and the `Retry-After` and `X-RateLimit-*` headers. Allowed responses also carry the `X-RateLimit-*` headers.
+- [x] Fail open: any Redis error or timeout (short connect and read timeouts, connection pooling) forwards the request and logs ERROR with `event=ratelimit_store_unavailable`.
+- [x] JSON access log including `$correlation_id`, the client IP and the rate-limit outcome.
+- [x] Limits come from environment variables: `RATE_LIMIT_REQUESTS=100`, `RATE_LIMIT_WINDOW_SECONDS=60`, `RATE_LIMIT_WARMUP_SECONDS=30`.
+- [x] Gateway console start-up banner: listening port, upstreams, limiter settings, Redis target.
+- [x] LuaDoc comments on all Lua modules.
 
 **Acceptance criteria**
 - During warm-up, request 101 inside 60 seconds is allowed. After warm-up, request 101 returns 429 with the correct headers.
@@ -352,22 +370,57 @@ P4 can run in parallel with P2 and P3.
 - With Redis stopped, API requests still succeed and an ERROR is logged.
 - `/internal/*` returns 404 through the gateway.
 
+**P4 execution evidence**
+- OpenResty 1.31.1.1 (Alpine) and Redis 8.8.4. The gateway `Dockerfile` has a `runtime` stage and a `test` stage with busted 2.3.0, luacheck 1.2.0 and luacov 0.17.0. Compose files, image labels and non-root hardening remain P5 tasks.
+- luacheck: 0 warnings in 17 files. busted: 80 tests passed with fake `ngx`, a fake clock and a Redis double that runs the real atomic script. luacov: 99.65% line coverage, with no gate. A route-table spec fails if any location other than `/api/v1/*` runs the limiter, or if `/internal/` or a metrics path is forwarded.
+- All four acceptance criteria passed against a running gateway. 121 API requests during warm-up returned 200 and left no Redis keys. After warm-up, request 101 returned 429 with `COMMON-429`, `Retry-After` and `X-RateLimit-*` headers. Health, readiness, docs and the landing page stayed at 200 for the blocked client. With Redis stopped, API requests succeeded, each logged `event=ratelimit_store_unavailable` at ERROR, and `/ready` returned `DEGRADED` with HTTP 200. `/internal/*`, dot-segment and percent-encoded traversal attempts returned 404.
+- Atomicity: 150 concurrent requests from one IP across 16 workers produced exactly 100 allowed and 50 rejected requests, with 100 Redis entries.
+- Real services: both Swagger UIs and specs loaded through `/docs/goals/` and `/docs/transactions/`. A goal and a deposit were created through the gateway, and the client's correlation ID appeared in all three components' logs. Temporary containers, volumes and network were removed.
+- Fail-open latency: in the first run, once a stopped Redis container's DNS entry expired, every request waited for the 2-second resolver timeout. The store now keeps a shared five-second back-off with a single probing request, so an outage slows at most one request per interval; 1 of 60 requests was slow in the re-run. Each request still logs ERROR (R-03).
+- Interpretations: `X-RateLimit-Reset` is the number of seconds until the oldest counted request leaves the window, the same unit as `Retry-After`. Warm-up and fail-open requests are not counted, so they carry no `X-RateLimit-*` headers. The gateway's own 404, 502 and 504 responses use Problem Details with `about:blank`, as the services do for framework errors. A connect timeout is reported as 502 (unavailable), not 504. Upstream 4xx/5xx bodies pass through unchanged.
+- Additions: `GOAL_SERVICE_UPSTREAM`, `TXN_SERVICE_UPSTREAM` and `GATEWAY_RESOLVER` (Section 6) make upstream addresses configurable for the P5 project compose files. Upstream names are re-resolved at runtime (`server ... resolve`), so the gateway starts before the services. The entrypoint validates every setting before the banner; `openresty -t` alone does not run `init_by_lua`.
+- Docs routing: the Transaction Service must run with `APP_ROOT_PATH=/docs/transactions` behind the gateway (P5 Compose). The Goal Service needs no setting. Only documentation paths are forwarded, so the `/docs/*` routes cannot reach API or internal endpoints.
+
 ### 5.6 P5 – Containers and Docker Compose
 
 **Tasks**
-- [ ] `services/goal-service/Dockerfile`: multi-stage (Maven build, then `eclipse-temurin:25-jre`), non-root user, a `HEALTHCHECK` on `/health`, JVM memory settings for containers.
-- [ ] `services/transaction-service/Dockerfile`: multi-stage (`uv sync --frozen`, then `python:3.14-slim`), non-root user. The entrypoint runs `alembic upgrade head` and then Uvicorn, with `exec` so signals reach Uvicorn.
-- [ ] `gateway/Dockerfile`: OpenResty (Alpine), copies `conf/`, `lua/` and `html/`.
-- [ ] `.dockerignore` in every project (build output, virtual environments, caches, tests, `.env`, `.git`).
-- [ ] Root `docker-compose.yml`: gateway, goal-service, transaction-service, goal-db, transaction-db, redis. Includes health checks, `depends_on: condition: service_healthy` (dependencies wait for `/ready`), `restart: unless-stopped`, named volumes, one internal network, host ports per LLD §5.1, and Redis not published.
-- [ ] Project compose files: goal-service + goal-db; transaction-service + transaction-db (with `GOAL_SERVICE_BASE_URL` configurable); gateway + redis (upstream addresses configurable).
-- [ ] Use a `stop_grace_period` short enough to match the immediate-shutdown decision (D-20).
-- [ ] Image labels: version, git SHA, licence.
+- [x] `services/goal-service/Dockerfile`: multi-stage (Maven build, then `eclipse-temurin:25-jre`), non-root user, a `HEALTHCHECK` on `/health`, JVM memory settings for containers.
+- [x] `services/transaction-service/Dockerfile`: multi-stage (`uv sync --frozen`, then `python:3.14-slim`), non-root user. The entrypoint runs `alembic upgrade head` and then Uvicorn, with `exec` so signals reach Uvicorn.
+- [x] `gateway/Dockerfile`: OpenResty (Alpine), copies `conf/`, `lua/` and `html/`.
+- [x] `.dockerignore` in every project (build output, virtual environments, caches, tests, `.env`, `.git`).
+- [x] Root `docker-compose.yml`: gateway, goal-service, transaction-service, goal-db, transaction-db, redis. Includes health checks, `depends_on: condition: service_healthy` (dependencies wait for `/ready`), `restart: unless-stopped`, named volumes, one internal network, host ports per LLD §5.1, and Redis not published.
+- [x] Project compose files: goal-service + goal-db; transaction-service + transaction-db (with `GOAL_SERVICE_BASE_URL` configurable); gateway + redis (upstream addresses configurable).
+- [x] Use a `stop_grace_period` short enough to match the immediate-shutdown decision (D-20).
+- [x] Image labels: version, git SHA, licence.
 
 **Acceptance criteria**
 - `make up` starts the full stack and every container becomes healthy.
 - Each project-level compose file starts on its own.
 - `docker compose down` stops every container cleanly.
+
+**P5 execution evidence**
+- Images, all non-root (uid 10001, `kalash`), with OCI labels for version, git SHA (`revision`), MIT licence and `created`. Image sizes are about 600 MB for Goal and 300 MB for Transaction.
+  - Goal: Maven Wrapper build on `maven:3.9.11-eclipse-temurin-25`, then Spring Boot layered extraction on `eclipse-temurin:25.0.4.1_1-jre`. The JVM is PID 1 with `MaxRAMPercentage=75` under a 1 GB Compose limit (768 MB heap). Its health probe is a bash `/dev/tcp` request, because the JRE image has no curl.
+  - Transaction: `uv sync --frozen --no-dev` (uv 0.9.16) on `python:3.14.10-slim`. The entrypoint runs `alembic upgrade head`, then `exec python -m app`.
+  - Gateway: the master process is now non-root too. Docker sets `ip_unprivileged_port_start=0` in containers, so it still listens on port 80.
+- `make up`, from both Bash and PowerShell, started all six containers healthy in about 40 seconds, in readiness order: databases, Goal, Transaction, then Redis and the gateway. A second `make up` on unchanged sources left the running containers untouched.
+- Full-stack checks:
+  - Every gateway, documentation and direct-port route answered as expected. The direct-port `:8000/docs` also works with `APP_ROOT_PATH=/docs/transactions`.
+  - A goal and a deposit made through port 80 survived `make down` and `make up`.
+  - Each container held only its own database password, and no password appeared in any log. Redis is not published.
+  - After a Redis crash, the restart policy brought it back healthy.
+- `docker compose stop`/`down` finished in about 2.4 seconds. Exit codes were 0, except the Goal JVM's conventional 143 (SIGTERM) after it logged JPA and Hikari closing. The Transaction Service logged its HTTP client and pool closing, the gateway workers logged `gateway_worker_stopped`, and PostgreSQL reported a normal shutdown.
+- Project stacks: each started alone and went healthy. The Transaction stack without a Goal Service stayed ready and returned 503 `TXN-002` for writes. With all three running separately, the chain gateway → Transaction → Goal worked through `host.docker.internal` on Docker Desktop.
+- Decisions:
+  - Each container gets an explicit `environment:` block, not the whole `.env`.
+  - The root stack fixes the profiles, container ports, database hosts and `APP_ROOT_PATH=/docs/transactions`.
+  - Project stacks read only names, users, passwords and tuning values from their `.env`. Those files are also used for host runs, so the Goal URL and documentation prefix inside containers come from `CONTAINER_GOAL_SERVICE_BASE_URL` and `CONTAINER_APP_ROOT_PATH`.
+  - Image `created` is the HEAD commit time, so builds are reproducible.
+  - Redis runs without persistence and with `--maxmemory 64mb --maxmemory-policy volatile-ttl` (R-04).
+  - Grace periods: 5 seconds for the services and Redis, 8 seconds for the gateway (its SIGQUIT drain is 5 seconds), and the 10-second default for PostgreSQL.
+  - Container logs rotate at 10 MB × 3.
+- P7 overlap: the acceptance criteria require `make up`, so the root `Makefile` provides only `help`, `build`, `up`, `down`, `restart`, `ps` and `logs`, calling Docker Compose directly. The remaining Section 5.8 targets, the per-project Makefiles and the paired scripts stay in P7.
+- Linux caveat: in the gateway project stack, nginx resolves upstream names only through DNS. `host.docker.internal` from `extra_hosts` is therefore not visible to it, and the upstreams must be set to the host bridge address. Only Docker Desktop (Windows) was verified.
 
 ### 5.7 P6 – Unit Tests and Quality Gates
 
@@ -400,6 +453,19 @@ P4 can run in parallel with P2 and P3.
 - Unit tests start no database, Redis or network.
 - Lint and format checks: Spotless (Java), Ruff check and format (Python), luacheck (Lua).
 
+**P6 execution evidence**
+- Most of the matrix was already covered by tests written alongside P1–P4. An audit of every row against the suites found three gaps, now closed:
+  - `GoalRules` and `StatusEvaluator` were tested only through `GoalService` and `BalanceAdjustmentService`. They now have mirrored tests of their own: `GoalRulesTest` covers whitespace and case variants for BR-03, today, tomorrow and past dates at the IST midnight boundary (BR-05), strict BR-06 bounds, and the BR-17/19 edit rules. `StatusEvaluatorTest` covers the full transition table, including `balance == target`, `balance > target`, reactivation on withdrawal and on a target raise, and terminal Cancelled.
+  - The Goal `test` profile has no DataSource, so it removes `db` from the readiness group, and no test showed `/ready` failing with the database. `ReadinessContextTest` restores the production group, checks it against `application.yml`, and replaces the database check with a switchable stand-in: `/ready` returns 503 `DOWN` (with no component details) and recovers, while `/health` stays 200.
+  - Transaction routers had no test for the `type` enum. A new test rejects lower-case, unknown, null and missing `type` values and a missing or malformed `goalId` with `COMMON-400` Problem Details, without touching the session or the Goal Service.
+- Error codes: every LLD §21.2 code has a test in the component that raises it (GOAL-* in the Goal Service; TXN-* and pass-through Goal codes in the Transaction Service), and `COMMON-429` is tested in the gateway specs. Both services also check the Problem Details contract for every catalogue code.
+- Rules: a search of all three test trees found no use of the real clock (`now()`, `Clock.system*`, `date.today()`, `time.time()`); the gateway's `ngx.now` is the fake. No test opens a database, Redis or network connection. The engine-creation test checks laziness only, and respx rejects any unmocked request.
+- Results:
+  - Goal: `./mvnw -B -o spotless:apply verify` in the Java 25 image with `--network none` passed, with 177 tests and 98.43% line coverage (565/574).
+  - Transaction: Ruff check and format passed; `uv run --locked pytest` passed with 187 tests and 99.85% line coverage.
+  - Gateway: luacheck reported 0 warnings and 0 errors in 17 files; busted passed 80 tests, with 99.65% luacov line coverage and no gate.
+- No production code changed in P6. Integration and e2e suites remain out of scope.
+
 ### 5.8 P7 – Makefile and Scripts
 
 Root `Makefile` targets call the project Makefiles. Each recipe chooses `scripts/<name>.sh` or `scripts/<name>.ps1` based on the operating system.
@@ -421,6 +487,41 @@ Root `Makefile` targets call the project Makefiles. Each recipe chooses `scripts
 
 **Scripts:** `setup`, `lint`, `format`, `test`, `coverage`, `backup`, `restore`, `clean`, `wait-for-ready`. Each exists as both `.sh` and `.ps1`, starts with a usage comment, and fails fast on errors.
 
+**P7 execution evidence**
+- Delivered:
+  - Root `Makefile` with every target in the table.
+  - Per-project Makefiles: Goal and Transaction have `format`, `lint`, `test`, `coverage`, `run`, `clean` and their own Compose lifecycle; Transaction adds `migrate`. The gateway has `lint`, `test`, `coverage`, `clean` and Compose; it has no Lua formatter, so it has no `format` target.
+  - Eleven script pairs in `scripts/`: the nine listed plus `run` and `migrate`, so that every non-Compose target calls a script (D-25).
+  - Shared helpers in `scripts/lib/`, and a Make include that chooses `.ps1` on Windows and `.sh` elsewhere. `SCRIPT_SHELL` and `POWERSHELL` override the choice.
+  - Root code-quality and run targets call the project Makefiles. `setup`, `backup` and `restore` act on the repository or root stack, so they call scripts directly.
+- Decisions:
+  - Goal scripts use the host JDK only when it is Java 25 or newer, and otherwise run the Maven Wrapper in `maven:3.9.11-eclipse-temurin-25` with a cache volume. This host has Java 21, so every Goal target ran that way. Gateway scripts run in the Dockerfile's `test` stage without a network.
+  - `test` runs tests only (no Spotless, JaCoCo or pytest-cov). `coverage` enforces the gates; `lint` owns formatting checks.
+  - `setup` creates each missing `.env` from its example. Blank database passwords get one random 32-character value per variable, shared across files so host runs and both kinds of stack can use the same database. A password already set in an existing `.env` is reused. Existing `.env` files are never changed, and passwords are never printed.
+  - `run goal` loads the service `.env` into the process environment and passes container variables by name (`-e NAME`), so no secret appears in a command line. `up` runs `wait-for-ready` after Compose's own health wait, which also proves the host port publishing.
+  - `backup` writes and checks the dump inside the container (`pg_restore --list`), then copies it out with `docker compose cp`. This keeps binary data out of shell pipes, which Windows PowerShell 5.1 would corrupt.
+  - `restore` refuses a non-dump file or a dump of the other database before touching anything. It then stops the owning service, restores in a single transaction, and always restarts the service.
+- Static checks:
+  - ShellCheck 0.10.0: clean.
+  - PowerShell parser: 0 errors on 7.6 and 5.1.
+  - Every script is LF, and every PowerShell script is ASCII.
+- Code-quality results: `make lint`, `make test`, `make coverage` and `make format` passed with `.ps1` scripts (PowerShell 7) and `.sh` scripts (Bash), with the P6 counts: Goal 177 tests at 98.43%, Transaction 187 at 99.85%, gateway 80 at 99.65%. `make format` left every source file byte-identical in both flavours. A deliberate unused import and failing test made `make lint` and `make test-txn` exit non-zero in both, and the root `lint` stopped before the gateway.
+- Stack results:
+  - `make setup` on a checkout without `.env` files, then `make up`, brought six healthy containers in 45 seconds, and `wait-for-ready` confirmed all three host URLs.
+  - A goal and a deposit were backed up, changed, then restored: `goal_db` with PowerShell and `transaction_db` with Bash. The data returned exactly to the backup.
+  - Refusals in both flavours: a wrong-database dump, a non-dump file and a truncated dump. Each was rejected without stopping the service, and the copied file was removed.
+  - A restore made to fail midway (a dependent view blocked `DROP TABLE`) rolled back, left the data unchanged and restarted `goal-service`, in both flavours.
+  - Retention deleted a 10-day-old dated dump and kept a 6-day-old dump and a non-dated file.
+- Host runs:
+  - `make migrate`, `make run-goal` and `make run-txn` ran against the stack's databases in both flavour combinations. `run-goal` used the Maven image (`local` profile, database through `host.docker.internal`), and a deposit through the host Transaction Service updated the Goal balance.
+  - No password appeared in a log or in a container's command-line arguments.
+  - `docker stop` produced the JVM's logged JPA and Hikari shutdown (exit 143). Make reports a stopped foreground server as an error, as it does for any interrupted recipe.
+- Other checks:
+  - Windows PowerShell 5.1 (`POWERSHELL=powershell`) passed `lint`, `test-txn`, `test-gateway`, `backup`, `restore` and `setup`. It wrote BOM-free files, and `finally` blocks run on `exit`.
+  - `make clean` removed `target/`, caches, coverage output and luacov files, and kept `.venv`, `.env` and backups.
+  - Make from plain PowerShell (no Git shell on `PATH`) gave the same results, and help text is printed with `$(info)` so it looks the same in every shell.
+- Not verified: Linux and macOS hosts. The Bash scripts take Linux paths into account (`chown` of Maven output, `host-gateway`), but only Git Bash on Windows ran them. Ctrl+C was not sent interactively; signals reach the service process directly (`exec` in Bash, a foreground child in PowerShell).
+
 ### 5.9 P8 – CI/CD Pipelines (GitHub Actions)
 
 | Workflow | Trigger (path filter) | Steps |
@@ -432,6 +533,47 @@ Root `Makefile` targets call the project Makefiles. Each recipe chooses `scripts
 
 - Image tags are `<semver>` and `<git-sha>`. The registry and its credentials are GitHub secrets and placeholders until Open Issue 2 is resolved.
 - PRs require all three pipelines to pass for any project they change.
+
+**P8 execution evidence**
+- Delivered in `.github/workflows/`:
+  - `goal-service.yml`, `transaction-service.yml` and `gateway.yml`, which follow the table above;
+  - a reusable `image.yml` for the build, check and push steps;
+  - `deploy.yml`.
+- Each pipeline's `verify` job runs the project's Make targets, so CI and developers use the same scripts:
+  - Goal: Temurin 25 with `GOAL_RUNNER=host`, then `make lint` and `make coverage`;
+  - Transaction: uv 0.9.16 and `uv sync --locked`, then the same targets;
+  - Gateway: the targets run in its test image.
+- Additions:
+  - a direct-SQL search in both service pipelines (Definition of Done);
+  - coverage artifacts kept for 14 days;
+  - a non-root (uid 10001) check on every image;
+  - `nginx -t` in the gateway image.
+- PR rule: path filters would leave required checks pending on PRs that do not touch a project. So `pull_request` always starts all three workflows, and a `changes` job skips their work (reported as passing) when the project is untouched. Pushes to `main` keep path filters, and tag pushes ignore them, so a release tag builds all three. The required check names are in CONTRIBUTING.
+- Tags and push:
+  - Every image gets the 7-character SHA. A `vX.Y.Z` tag adds `X.Y.Z` and fails if any project's own version differs.
+  - Images are pushed only on pushes to `main` or a tag, and only when the repository variable `KALASH_REGISTRY` is set (Open Issue 2). Otherwise they are built and checked, with a notice.
+- Deploy:
+  - Runs manually or on a published release.
+  - Waits up to 30 minutes for all three images, copies `docker-compose.yml` over SSH (known-hosts checked), then runs `docker compose pull` and `up -d --no-build --wait`.
+  - Skips with a notice until the host variables are set (Open Issue 1).
+  - The root compose image names are now `${KALASH_IMAGE_PREFIX:-kalash}/<name>:${KALASH_IMAGE_TAG:-0.1.0}`, so local behaviour is unchanged.
+- Hardening:
+  - `contents: read` permissions and `persist-credentials: false`.
+  - Actions pinned to commit SHAs: checkout v7.0.1, setup-java v6.1.0, upload-artifact v7.0.2, setup-uv v10.3.2.
+  - Registry and SSH secrets are used only in the push and deploy steps.
+  - Expression values reach scripts through `env:`.
+  - Deploy validates every value it puts in the remote command.
+- Verification without GitHub:
+  - actionlint 1.7.7 (with ShellCheck) reports nothing.
+  - The tag and push logic gave the right result for PR, `main` with and without a registry, matching and mismatched release tags, and `workflow_dispatch`.
+  - Version extraction returned `0.1.0-SNAPSHOT`, `0.1.0` and `0.1.0`.
+  - Both SQL searches are clean on the code and catch planted `text()` and string `execute()` calls.
+  - The Goal and Transaction verify steps ran on Linux (Temurin 25 and Python 3.14 containers): 177 and 187 tests, with the gates met.
+  - `nginx -t` and the uid check passed on the built images.
+  - Deploy rehearsal with only the compose file and `.env` in an empty directory:
+    - `up --no-build` reached six healthy containers.
+    - Against a local registry (`registry:2.8.3`), `docker manifest inspect`, `docker compose pull` and `up -d --no-build --wait` ran the stack from `1.0.0` registry images.
+- Not verified: an actual GitHub Actions run, pushing to a real registry, and SSH deployment. These need a push to `origin`, a registry and a host, which are repository-owner decisions.
 
 ### 5.10 P9 – Documentation and Handoff
 
@@ -455,10 +597,25 @@ Root `Makefile` targets call the project Makefiles. Each recipe chooses `scripts
 17. Links to Contributing, Code of Conduct, Security, Troubleshooting, Changelog, License; docs index
 
 **Also**
-- [ ] A README per project (purpose, standalone run, configuration, tests).
-- [ ] Architecture decision records in `docs/adr/` for D-04, D-09 to D-14, D-16, D-18 and D-20.
-- [ ] The `1.0.0` entry in `CHANGELOG.md`.
-- [ ] A list of the LLD updates needed by the deviations (D-04, D-09, D-14, D-16, D-18, D-23).
+- [x] A README per project (purpose, standalone run, configuration, tests).
+- [x] Architecture decision records in `docs/adr/` for D-04, D-09 to D-14, D-16, D-18 and D-20.
+- [x] The `1.0.0` entry in `CHANGELOG.md`.
+- [x] A list of the LLD updates needed by the deviations (D-04, D-09, D-14, D-16, D-18, D-23).
+
+**P9 execution evidence**
+- The root README was rewritten in the 17 sections above:
+  - a Mermaid architecture diagram and prerequisites for Windows, macOS and Linux;
+  - the full configuration table, services, and the API and error summary;
+  - rate limiting, logging, start-up and shutdown;
+  - testing, Make, Compose, CI/CD, backup and restore, and security;
+  - links to every document.
+  Its links and anchors were checked automatically, and three stale anchors in other documents were fixed.
+- Each project README now opens with its Release 1 purpose instead of a phase status, and keeps its run, configuration, test and phase-evidence sections.
+- Ten ADRs in `docs/adr/`, one per required decision (D-04, D-09 to D-14, D-16, D-18, D-20). Each fact cited was checked against the code.
+- `docs/Kalash_LLD_v1.1_Updates.md` lists the LLD changes: the six required deviations (Part A) and thirteen clarifications from implementation (Part B).
+- CHANGELOG: a `1.0.0` entry with highlights and known limitations. It is headed "Unreleased" because no `v1.0.0` tag exists; the release procedure in CONTRIBUTING dates it when tagging.
+- CONTRIBUTING gained the release procedure and the required CI checks. SECURITY gained a CI/CD section. TROUBLESHOOTING gained CI entries.
+- The traceability matrix (Section 8) now names the real test classes, and every business rule maps to tests.
 
 ---
 
@@ -478,7 +635,26 @@ Root `Makefile` targets call the project Makefiles. Each recipe chooses `scripts
 | `REDIS_HOST` / `REDIS_PORT` / `REDIS_TIMEOUT_MS` | Gateway | `redis` / `6379` / `100` |
 | `RATE_LIMIT_REQUESTS` / `RATE_LIMIT_WINDOW_SECONDS` / `RATE_LIMIT_WARMUP_SECONDS` | Gateway | `100` / `60` / `30` |
 | `TRUSTED_PROXIES` | Gateway | empty |
+| `GOAL_SERVICE_UPSTREAM` / `TXN_SERVICE_UPSTREAM` | Gateway | `goal-service:8080` / `transaction-service:8000` |
+| `GATEWAY_RESOLVER` | Gateway | empty (the container's first nameserver; Docker's `127.0.0.11` on a Compose network) |
+| `CONTAINER_GOAL_SERVICE_BASE_URL` / `CONTAINER_APP_ROOT_PATH` | Transaction project compose | `http://host.docker.internal:8080` / empty |
+| `GIT_SHA` / `BUILD_DATE` | Image labels (set by Make) | HEAD short SHA / HEAD commit time; `unknown` without Make |
 | `BACKUP_DIR` / `BACKUP_RETENTION_DAYS` | Scripts | `./backups` / `7` |
+| `GOAL_RUNNER` | Goal scripts: Java 25 on the host or the Maven image | `auto` (`host` when Java 25+ is found, else `docker`) |
+| `MAVEN_IMAGE` / `GOAL_MAVEN_CACHE` | Goal scripts in Docker | `maven:3.9.11-eclipse-temurin-25` / `kalash-goal-maven-cache` |
+| `GATEWAY_TEST_IMAGE` | Gateway scripts | `kalash/gateway-test` |
+| `SCRIPT_SHELL` / `POWERSHELL` | Makefiles: script flavour and PowerShell executable | `ps1` on Windows, else `sh` / `pwsh` |
+| `KALASH_IMAGE_PREFIX` / `KALASH_IMAGE_TAG` | Root compose application image names (deployment) | `kalash` / `0.1.0` |
+
+**CI/CD repository settings** (GitHub variables and secrets, not `.env`)
+
+| Setting | Kind | Used by |
+|---|---|---|
+| `KALASH_REGISTRY` | Variable, for example `ghcr.io/<owner>` | `image.yml` push; `deploy.yml` |
+| `REGISTRY_USERNAME` / `REGISTRY_PASSWORD` | Secrets | `image.yml` push; `deploy.yml` image check |
+| `DEPLOY_HOST` / `DEPLOY_USER` / `DEPLOY_PATH` | Variables | `deploy.yml` |
+| `DEPLOY_SSH_KEY` / `DEPLOY_KNOWN_HOSTS` | Secrets | `deploy.yml` |
+| `production` | Environment, ideally with required reviewers | `deploy.yml` |
 
 Passwords are only ever in `.env` and never in code, logs or the startup banner.
 
@@ -557,22 +733,41 @@ Each comment states the business rule it implements (for example "Implements BR-
 
 | Story | Rules | Implemented In | Unit Tests |
 |---|---|---|---|
-| KAL-BUC-00001 Create Goal | BR-01 to 05 | `GoalService.create`, `GoalRules` | `GoalServiceTest`, `GoalRulesTest`, `GoalControllerTest` |
+| KAL-BUC-00001 Create Goal | BR-01 to 05 | `GoalService.create`, `GoalRules` | `GoalServiceTest`, `GoalRulesTest`, `GoalApiTest`, `WebBoundarySliceTest`, `ConstraintErrorMapperTest` |
 | KAL-BUC-00002 Edit Goal | BR-05, 06, 16, 17, 19 | `GoalService.update`, `GoalRules`, `StatusEvaluator` | `GoalServiceTest`, `GoalRulesTest` |
-| KAL-BUC-00003 Cancel Goal | BR-18 | `GoalService.cancel` | `GoalServiceTest` |
-| KAL-BUC-00004 Delete Cancelled Goal | BR-20 | `goal_deletion.service`, internal DELETE | `test_goal_deletion_service`, `BalanceAdjustmentControllerTest` |
-| KAL-BUC-00005 Record Deposit | BR-07 to 11, 15 | `transactions.service`, `BalanceAdjustmentService` | `test_transaction_service`, `BalanceAdjustmentServiceTest` |
+| KAL-BUC-00003 Cancel Goal | BR-18 | `GoalService.cancel` | `GoalServiceTest`, `GoalApiTest` |
+| KAL-BUC-00004 Delete Cancelled Goal | BR-20 | `goal_deletion.service`, internal DELETE | `goal_deletion/test_service.py`, `transactions/test_router.py`, `GoalServiceTest`, `GoalApiTest` |
+| KAL-BUC-00005 Record Deposit | BR-07 to 11, 15 | `transactions.service`, `BalanceAdjustmentService` | `transactions/test_service.py`, `transactions/test_repository_schema.py`, `BalanceAdjustmentServiceTest` |
 | KAL-BUC-00006 Record Withdrawal | BR-07, 09, 12, 14, 16 | Same as above | Same as above |
-| KAL-BUC-00007 Edit Transaction | BR-07, 13, 14 | `transactions.service` (delta), `BalanceAdjustmentService` | `test_transaction_service`, `BalanceAdjustmentServiceTest` |
+| KAL-BUC-00007 Edit Transaction | BR-07, 13, 14 | `transactions.service` (delta), `BalanceAdjustmentService` | `transactions/test_service.py`, `transactions/test_repository_schema.py`, `BalanceAdjustmentServiceTest` |
 | KAL-BUC-00008 Delete Transaction | BR-13, 14 | Same as above | Same as above |
-| KAL-BUC-00009 Transaction History | – | `transactions.repository`, router | `test_transaction_router` |
+| KAL-BUC-00009 Transaction History | – | `transactions.repository`, router | `transactions/test_router.py`, `transactions/test_repository_schema.py` |
 | KAL-BUC-00010 Goal Progress | BR-22 | `InsightsCalculator` | `InsightsCalculatorTest` |
 | KAL-BUC-00011 Suggested Monthly Saving | BR-23 | `InsightsCalculator` | `InsightsCalculatorTest` |
 | KAL-BUC-00012 Off-track | BR-24 | `InsightsCalculator` | `InsightsCalculatorTest` |
 | KAL-BUC-00013 Overdue | BR-21 | `InsightsCalculator` | `InsightsCalculatorTest` |
-| KAL-BUC-00014 Overview | BR-25 | `GoalService.list`, `GoalRepository` | `GoalServiceTest` |
-| KAL-BUC-00015 Auto-achieve | BR-15 | `StatusEvaluator` | `StatusEvaluatorTest` |
+| KAL-BUC-00014 Overview | BR-25 | `GoalService.list`, `GoalRepository` | `GoalServiceTest`, `GoalApiTest` |
+| KAL-BUC-00015 Auto-achieve | BR-15 | `StatusEvaluator` | `StatusEvaluatorTest`, `BalanceAdjustmentServiceTest` |
 | KAL-BUC-00016 Return to Active | BR-16 | `StatusEvaluator`, `GoalService.update` | `StatusEvaluatorTest`, `GoalServiceTest` |
+
+Test files are under `services/goal-service/src/test/java/com/kalash/goal/` (Java classes) and `services/transaction-service/tests/unit/` (Python modules).
+
+**Business-rule coverage (verified in P9)**
+
+| Rules | Unit tests |
+|---|---|
+| BR-01 multiple goals, BR-25 overview order | `GoalServiceTest` (paged, sorted query), `GoalApiTest` |
+| BR-02 required fields, BR-04 whole-rupee positive target | `GoalApiTest` (invalid create bodies), `WebBoundarySliceTest` (decimals, overflow) |
+| BR-03 unique name | `GoalRulesTest` (case and whitespace), `GoalServiceTest`, `ConstraintErrorMapperTest` (concurrent duplicate) |
+| BR-05 future date, BR-06 target above balance | `GoalRulesTest` (IST midnight), `GoalServiceTest` |
+| BR-07 positive whole-rupee amounts | `transactions/test_router.py`, `transactions/test_repository_schema.py`, `BalanceAdjustmentServiceTest` |
+| BR-08 records only | No code to test: nothing moves money |
+| BR-09 automatic, immutable date | `transactions/test_service.py` (IST date, preserved on edit), `transactions/test_router.py` |
+| BR-10 to BR-14 operation and status rules, non-negative balance | `BalanceAdjustmentServiceTest` (all 12 operation-status pairs, `GOAL-009` to `GOAL-012`), `transactions/test_service.py` (deltas, rollback) |
+| BR-15, BR-16 automatic transitions | `StatusEvaluatorTest`, `BalanceAdjustmentServiceTest`, `GoalServiceTest` (target raise) |
+| BR-17, BR-19 edit limits, BR-18 cancellation | `GoalRulesTest`, `GoalServiceTest` |
+| BR-20 delete only Cancelled | `GoalServiceTest`, `goal_deletion/test_service.py` |
+| BR-21 to BR-24 insights | `InsightsCalculatorTest` (all seven LLD worked examples and edge rules) |
 
 **Requested engineering capabilities**
 
@@ -620,7 +815,9 @@ Each comment states the business rule it implements (for example "Implements BR-
 | 8 | Recovery from a cross-service commit mismatch | Manual correction in Release 1; automated reconciliation to be decided |
 | 9 | Pinned JUnit version under Spring Boot 4.1 | Resolved in P1: Spring Boot 4.1.2 manages Jupiter 6.0.3; verified on Java 25 |
 | 10 | Production policy for Swagger and docs routes (disable or protect) | New: to be decided before any non-local deployment |
-| 11 | LLD revision to include deviations D-04, D-09, D-14, D-16, D-18, D-23 | New: LLD 1.1 |
+| 11 | LLD revision to include deviations D-04, D-09, D-14, D-16, D-18, D-23 | Change list ready: `docs/Kalash_LLD_v1.1_Updates.md`; LLD 1.1 to be issued by its owner |
+| 12 | GitHub repository settings: branch protection with the required checks, CI variables and secrets, `production` environment | New in P8: to be applied by a repository administrator (CONTRIBUTING, Section 6) |
+| 13 | Release 1.0.0: version bump, changelog date and `v1.0.0` tag | New in P9: follow the CONTRIBUTING release procedure when the owner decides to release |
 
 LLD Open Issues 3–7 are closed by D-31.
 
@@ -628,18 +825,18 @@ LLD Open Issues 3–7 are closed by D-31.
 
 ## 11. Definition of Done
 
-- [ ] All 16 user stories are implemented and every business rule (BR-01 to BR-25) is covered by unit tests.
-- [ ] Every error code (LLD §21.2 plus `COMMON-429`) has a test; line coverage is at least 80% for both services.
-- [ ] Spotless, Ruff and luacheck pass; all three CI pipelines are green.
-- [ ] No direct SQL in application code; the CI search finds nothing.
-- [ ] `/health`, `/ready` and Swagger work for both services, directly and through the gateway.
-- [ ] Rate limiting behaves as in D-10 to D-14, including warm-up and fail-open.
-- [ ] No CORS headers are returned; `/internal/*` is blocked at the gateway.
-- [ ] Coloured startup banners show the agreed information and no secrets.
-- [ ] Ctrl+C stops each service immediately and the log shows its resources closed.
-- [ ] `make setup`, `make test`, `make up` and `make down` work on Windows (PowerShell) and on Linux or macOS.
-- [ ] The root contains only documentation, orchestration and configuration; every project has a Dockerfile, `.dockerignore`, compose file, `.env.example`, Makefile and README.
-- [ ] README, LICENSE, CODE_OF_CONDUCT, CONTRIBUTING, SECURITY, TROUBLESHOOTING and CHANGELOG are complete.
+- [x] All 16 user stories are implemented and every business rule (BR-01 to BR-25) is covered by unit tests. *(Section 8; BR-08 has no code to test.)*
+- [x] Every error code (LLD §21.2 plus `COMMON-429`) has a test; line coverage is at least 80% for both services. *(P6: 98.43% and 99.85%.)*
+- [ ] Spotless, Ruff and luacheck pass; all three CI pipelines are green. *(Lint passes locally and on Linux; the pipelines have not run on GitHub yet, because nothing has been pushed.)*
+- [x] No direct SQL in application code; the CI search finds nothing. *(Search run locally, P8.)*
+- [x] `/health`, `/ready` and Swagger work for both services, directly and through the gateway. *(P4, P5.)*
+- [x] Rate limiting behaves as in D-10 to D-14, including warm-up and fail-open. *(P4.)*
+- [x] No CORS headers are returned; `/internal/*` is blocked at the gateway. *(P1, P4.)*
+- [x] Coloured startup banners show the agreed information and no secrets. *(P1, P4.)*
+- [x] Ctrl+C stops each service immediately and the log shows its resources closed. *(P1, P5, P7: signal-driven.)*
+- [ ] `make setup`, `make test`, `make up` and `make down` work on Windows (PowerShell) and on Linux or macOS. *(Windows verified with PowerShell 7, 5.1 and Git Bash. On Linux, only the Goal and Transaction lint and coverage targets ran, in containers; a Linux or macOS host run is still needed.)*
+- [x] The root contains only documentation, orchestration and configuration; every project has a Dockerfile, `.dockerignore`, compose file, `.env.example`, Makefile and README.
+- [x] README, LICENSE, CODE_OF_CONDUCT, CONTRIBUTING, SECURITY, TROUBLESHOOTING and CHANGELOG are complete. *(P9.)*
 
 ---
 

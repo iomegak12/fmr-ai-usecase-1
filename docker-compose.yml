@@ -1,0 +1,216 @@
+# Kalash full stack (plan Section 5.6, LLD §5.1 and §27).
+#
+#   make setup                    # creates .env with generated passwords
+#   make up                       # or: docker compose up -d --build --wait
+#   make down                     # or: docker compose down
+#
+# KALASH_IMAGE_PREFIX and KALASH_IMAGE_TAG (default kalash and 0.1.0) name
+# the three application images. The deploy workflow sets them to the
+# registry's images and pulls instead of building:
+#   docker compose pull gateway goal-service transaction-service
+#   docker compose up -d --no-build --wait
+#
+# Start-up order follows readiness: each database, then the Goal Service
+# (/ready includes goal_db), then the Transaction Service (/ready includes
+# transaction_db), then the gateway once both services and Redis are healthy.
+# Each container receives only the variables it needs; database passwords
+# never reach the other service or the gateway.
+
+name: kalash
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-build-args: &build-args
+  GIT_SHA: ${GIT_SHA:-unknown}
+  BUILD_DATE: ${BUILD_DATE:-unknown}
+
+services:
+  gateway:
+    build:
+      context: ./gateway
+      args:
+        <<: *build-args
+        GATEWAY_VERSION: "0.1.0"
+    image: ${KALASH_IMAGE_PREFIX:-kalash}/gateway:${KALASH_IMAGE_TAG:-0.1.0}
+    ports:
+      - "80:80"
+    environment:
+      GOAL_SERVICE_UPSTREAM: ${GOAL_SERVICE_UPSTREAM:-goal-service:8080}
+      TXN_SERVICE_UPSTREAM: ${TXN_SERVICE_UPSTREAM:-transaction-service:8000}
+      REDIS_HOST: ${REDIS_HOST:-redis}
+      REDIS_PORT: ${REDIS_PORT:-6379}
+      REDIS_TIMEOUT_MS: ${REDIS_TIMEOUT_MS:-100}
+      RATE_LIMIT_REQUESTS: ${RATE_LIMIT_REQUESTS:-100}
+      RATE_LIMIT_WINDOW_SECONDS: ${RATE_LIMIT_WINDOW_SECONDS:-60}
+      RATE_LIMIT_WARMUP_SECONDS: ${RATE_LIMIT_WARMUP_SECONDS:-30}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-}
+      GATEWAY_RESOLVER: ${GATEWAY_RESOLVER:-}
+    depends_on:
+      goal-service:
+        condition: service_healthy
+      transaction-service:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    # SIGQUIT (image STOPSIGNAL) lets workers finish within
+    # worker_shutdown_timeout (5s); the grace period only backs that up.
+    stop_grace_period: 8s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+  goal-service:
+    build:
+      context: ./services/goal-service
+      args:
+        <<: *build-args
+        VERSION: "0.1.0-SNAPSHOT"
+    image: ${KALASH_IMAGE_PREFIX:-kalash}/goal-service:${KALASH_IMAGE_TAG:-0.1.0}
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Kolkata}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      GOAL_DB_HOST: goal-db
+      GOAL_DB_PORT: "5432"
+      GOAL_DB_NAME: ${GOAL_DB_NAME:-goal_db}
+      GOAL_DB_USER: ${GOAL_DB_USER:-goal_user}
+      GOAL_DB_PASSWORD: ${GOAL_DB_PASSWORD:?Set GOAL_DB_PASSWORD in .env}
+    depends_on:
+      goal-db:
+        condition: service_healthy
+    # Dependants wait for readiness (database reachable), not just liveness.
+    healthcheck:
+      test: ["CMD", "healthcheck", "/ready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 90s
+    # The JVM sizes its heap from this limit (MaxRAMPercentage=75).
+    mem_limit: 1g
+    # D-20: immediate shutdown on SIGTERM; no long drain.
+    stop_grace_period: 5s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+  transaction-service:
+    build:
+      context: ./services/transaction-service
+      args:
+        <<: *build-args
+        VERSION: "0.1.0"
+    image: ${KALASH_IMAGE_PREFIX:-kalash}/transaction-service:${KALASH_IMAGE_TAG:-0.1.0}
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: docker
+      APP_TIMEZONE: ${APP_TIMEZONE:-Asia/Kolkata}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      TXN_DB_HOST: transaction-db
+      TXN_DB_PORT: "5432"
+      TXN_DB_NAME: ${TXN_DB_NAME:-transaction_db}
+      TXN_DB_USER: ${TXN_DB_USER:-txn_user}
+      TXN_DB_PASSWORD: ${TXN_DB_PASSWORD:?Set TXN_DB_PASSWORD in .env}
+      GOAL_SERVICE_BASE_URL: ${GOAL_SERVICE_BASE_URL:-http://goal-service:8080}
+      GOAL_SERVICE_TIMEOUT_SECONDS: ${GOAL_SERVICE_TIMEOUT_SECONDS:-3}
+      # Behind the gateway, documentation is served under this prefix.
+      APP_ROOT_PATH: /docs/transactions
+    depends_on:
+      transaction-db:
+        condition: service_healthy
+      goal-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "healthcheck", "/ready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+    stop_grace_period: 5s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+  goal-db:
+    image: postgres:18.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${GOAL_DB_NAME:-goal_db}
+      POSTGRES_USER: ${GOAL_DB_USER:-goal_user}
+      POSTGRES_PASSWORD: ${GOAL_DB_PASSWORD:?Set GOAL_DB_PASSWORD in .env}
+    volumes:
+      - goal-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+  transaction-db:
+    image: postgres:18.6
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: ${TXN_DB_NAME:-transaction_db}
+      POSTGRES_USER: ${TXN_DB_USER:-txn_user}
+      POSTGRES_PASSWORD: ${TXN_DB_PASSWORD:?Set TXN_DB_PASSWORD in .env}
+    volumes:
+      - transaction-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+  # Rate-limit store only: not published, no persistence (counts are
+  # short-lived by design), bounded memory (plan risk R-04).
+  redis:
+    image: redis:8.8.4-alpine
+    command:
+      - redis-server
+      - --save
+      - ""
+      - --appendonly
+      - "no"
+      - --maxmemory
+      - 64mb
+      - --maxmemory-policy
+      - volatile-ttl
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    stop_grace_period: 5s
+    restart: unless-stopped
+    networks: [kalash]
+    logging: *logging
+
+networks:
+  kalash:
+    name: kalash
+
+volumes:
+  goal-data:
+  transaction-data:

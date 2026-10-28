@@ -1,0 +1,6 @@
+-- luacov settings: report on the gateway modules only (no coverage gate, D-23).
+return {
+  include = { "lua/kalash/" },
+  statsfile = "luacov.stats.out",
+  reportfile = "luacov.report.out",
+}

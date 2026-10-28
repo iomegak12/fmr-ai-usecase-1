@@ -1,4 +1,4 @@
-"""Phase 1 app factory; business routers are introduced in P3."""
+"""Transaction Service application with Phase 3 business routes."""
 
 from zoneinfo import ZoneInfo
 
@@ -11,17 +11,19 @@ from app.common.config import Settings
 from app.common.correlation import CorrelationMiddleware
 from app.common.errors import register_error_handlers
 from app.common.lifecycle import application_lifespan
+from app.goal_deletion.router import router as deletion_router
 from app.health.router import router as health_router
+from app.transactions.router import router as transaction_router
 
 
 def create_app(settings: Settings | None = None, clock: Clock | None = None) -> FastAPI:
     """Create a service with validated settings and injectable time."""
-    settings = settings or Settings()
+    settings = settings or Settings.model_validate({})
     clock = clock or SystemClock(ZoneInfo(settings.app_timezone))
     app = FastAPI(
         title="Kalash Transaction Service",
         version=__version__,
-        description="Transaction Service cross-cutting foundations. Business APIs arrive in P3.",
+        description="Transaction history, balance coordination and Cancelled-goal deletion.",
         lifespan=application_lifespan(settings),
         root_path=settings.app_root_path,
         root_path_in_servers=False,
@@ -42,6 +44,8 @@ def create_app(settings: Settings | None = None, clock: Clock | None = None) -> 
     app.add_middleware(CorrelationMiddleware)
     register_error_handlers(app, clock)
     app.include_router(health_router)
+    app.include_router(deletion_router)
+    app.include_router(transaction_router)
     Instrumentator(excluded_handlers=["/metrics"]).instrument(app).expose(
         app, endpoint="/metrics", include_in_schema=False
     )
